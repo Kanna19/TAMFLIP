@@ -7,9 +7,8 @@ Project for the course CS4443
 
 URL | Comments
 --- | ---
-https://developers.amadeus.com/self-service/category/air | None
-https://developer.singaporeair.com/docs/flight_search/ | None
-https://developer.lufthansa.com | None
-https://aviation-edge.com/premium-api/ | Amazing api with nearby airport search and autocomplete but only limited data and API calls
-https://developer.laminardata.aero/documentation/flightdata | 14 day free trail (didnt activate it yet)
+https://developers.amadeus.com/self-service/category/air | Can do airport autocomplete and nearest airport search. Rate limits per month: 2000 for flight search, 10000 for autocomplete and nearest airport
+https://developer.lufthansa.com | Rate limit: 5 calls per second, 1000 calls per hour
+https://developer.singaporeair.com/docs/flight_search/ | Rate limit: 1 call per second, 100 calls per day
+https://developer.laminardata.aero/documentation/flightdata | 14 day free trail activated
  
