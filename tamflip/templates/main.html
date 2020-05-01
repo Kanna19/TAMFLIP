@@ -23,13 +23,13 @@
       </section>
 
       <section id="flight-enquiry">
-        <div id="flight-form">
+        <form id="flight-form" method="post">
           <div class="top">
             <ul>
 
             <div class="dropdown cls">
               <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="type1Num">1</span> <span id="type1Txt">Passenger</span>
+                <span id="type1Num" name="numOfPassengers">1</span> <span id="type1Txt">Passenger</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
@@ -51,7 +51,7 @@
 
             <div class="dropdown cls">
               <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="type2">Economy</span>
+                <span id="type2" name="typeOfClass">Economy</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <button class="dropdown-item type21" type="button">Economy</button>
@@ -65,18 +65,18 @@
 
           <div class="bottom">
             <div class="bottom-left">
-              <input type="text" class="info-1" name="" value="" placeholder="From">
-              <input type="text" class="info-1" name="" value="" placeholder="Destination">
+              <input type="text" class="info-1" name="fromLoaction" value="" placeholder="From">
+              <input type="text" class="info-1" name="destinationLocation" value="" placeholder="Destination">
             </div>
             <div class="bottom-right">
               <input type="date" class="info-2" name="Travel Date" value="Travel Date" placeholder="Travel Date">
             </div>
             <div class="btn">
-              <input class="button1" type="button" name="" value="Search">
+              <input class="button1" type="submit" name="" value="Search">
             </div>
           </div>
 
-        </div>
+        </form>
 
         <div class="load">
           <ul>

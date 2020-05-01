@@ -1,3 +1,7 @@
+// $("body").on("click", function(){
+//   $(this).css("background", "green");
+// })
+
 
 $(".type21").on("click", function(){
   $("#type2").text("Economy");
