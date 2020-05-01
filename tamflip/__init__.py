@@ -1,6 +1,8 @@
 #Application Factory
 import os
 from flask import Flask
+from flask import render_template
+from flask import request
 
 def create_app(test_config=None):
     #create and configure the app
@@ -18,8 +20,16 @@ def create_app(test_config=None):
         pass
 
     # istart page
-    @app.route('/')
+    @app.route('/', methods=['GET', 'POST'])
     def index():
-        return "Hello, World"
+        if request.method == 'GET':
+            return render_template('main.html')
+
+        if request.method == 'POST':
+            # return render_template('main.html', submitted=True)
+            res = "Form Submitted<br>"
+            res += request.form.get('fromLocation')
+            return res
+
 
     return app
