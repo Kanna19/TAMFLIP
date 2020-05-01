@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <title>TAMFLIP</title>
+  </head>
+  <body>
+
+    <nav id="header" class="navbar navbar-dark" style="background: rgb(70,70,70)">
+      <div class="container">
+        <a href="#" class="navbar-brand">TAMFLIP</a>
+      </div>
+    </nav>
+
+    <div id="content">
+      <section id="header-image" class="jumbotron jumbotron-fluid text-center">
+      </section>
+
+      <section id="title">
+          <p>Welcome to Tamflip!</p>
+      </section>
+
+      <section id="flight-enquiry">
+        <div id="flight-form">
+          <div class="top">
+            <ul>
+
+            <div class="dropdown cls">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="type1Num">1</span> <span id="type1Txt">Passenger</span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                <label for="Adults">Adults : </label>
+                <input class="adlt" type="number" name="Adults" value="1" min="1">
+
+                <label for="Childs">Childs : </label>
+                <input class="chld" type="number" name="Childs" value="0" min="0">
+
+                <label for="Infants">Infants:</label>
+                <input class="inft" type="number" name="Infants" value="0" min="0">
+
+                <div class="btn">
+                  <input class="button1 passenger" type="button" name="" value="Apply">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="dropdown cls">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="type2">Economy</span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item type21" type="button">Economy</button>
+                <button class="dropdown-item type22" type="button">Premium Economy</button>
+                <button class="dropdown-item type23" type="button">Business</button>
+                <button class="dropdown-item type24" type="button">First Class</button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="bottom">
+            <div class="bottom-left">
+              <input type="text" class="info-1" name="" value="" placeholder="From">
+              <input type="text" class="info-1" name="" value="" placeholder="Destination">
+            </div>
+            <div class="bottom-right">
+              <input type="date" class="info-2" name="Travel Date" value="Travel Date" placeholder="Travel Date">
+            </div>
+            <div class="btn">
+              <input class="button1" type="button" name="" value="Search">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="load">
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+          </ul>
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+    <script type="text/javascript" src="../static/js/lib/jQuery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/flight-input-form.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  </body>
+</html>
