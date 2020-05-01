@@ -31,5 +31,8 @@ def create_app(test_config=None):
             res += request.form.get('fromLocation')
             return res
 
+    # Link with Database
+    from . import db
+    db.init_app(app)
 
     return app
