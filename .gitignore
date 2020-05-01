@@ -1,0 +1,7 @@
+#Ignore virtual environment
+pro_mode/
+
+
+#Ignore python cache files
+*.pyc
+__pycache__/
