@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask import render_template
 from flask import request
+from .apiModule import *
 
 def create_app(test_config=None):
     #create and configure the app
@@ -11,7 +12,6 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'tamflip.sqlite'),
     )
-
 
     #ensure instance folder exists
     try:
@@ -26,10 +26,8 @@ def create_app(test_config=None):
             return render_template('main.html')
 
         if request.method == 'POST':
-            # return render_template('main.html', submitted=True)
-            res = "Form Submitted<br>"
-            res += request.form.get('fromLocation')
-            return res
+            flightDetails = apiModule.getFlightDetails(request.form)
+            return str(flightDetails)
 
     # Link with Database
     from . import db
