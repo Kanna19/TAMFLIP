@@ -5,7 +5,7 @@ Make sure you are in the root directory of the project (TAMFLIP) before proceedi
 
 ## Create virtual environment
 ```
-python3 -m venv pro_mode`
+python3 -m venv pro_mode
 ```
 
 ## Activate virtual environment
@@ -22,7 +22,7 @@ Run `pip install --upgrade pip` if you want a newer version of pip.
 ```bash
 export FLASK_APP=tamflip
 export FLASK_ENV=development
-``` 
+```
 To make sure evrything is running fine:
 ```
 flask run

@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask import render_template
 from flask import request
-from .apiModule import *
+from . import apiModule
 
 def create_app(test_config=None):
     #create and configure the app
