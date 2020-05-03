@@ -19,19 +19,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # istart page
-    @app.route('/', methods=['GET', 'POST'])
-    def index():
-        if request.method == 'GET':
-            return render_template('main.html')
-
-        if request.method == 'POST':
-            g.flightDetails = apiModule.getFlightDetails(request.form)
-            print(g.flightDetails)
-            return render_template('main.html')
-
     # Link with Database
     from . import db
     db.init_app(app)
+
+    #Link blueprints
+    from . import index
+    app.register_blueprint(index.bp)
 
     return app
