@@ -2,7 +2,7 @@
 import os
 from flask import Flask
 from flask import render_template
-from flask import request
+from flask import request, g
 from . import apiModule
 
 def create_app(test_config=None):
@@ -26,8 +26,9 @@ def create_app(test_config=None):
             return render_template('main.html')
 
         if request.method == 'POST':
-            flightDetails = apiModule.getFlightDetails(request.form)
-            return str(flightDetails)
+            g.flightDetails = apiModule.getFlightDetails(request.form)
+            print(g.flightDetails)
+            return render_template('main.html')
 
     # Link with Database
     from . import db
