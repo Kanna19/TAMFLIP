@@ -1,17 +1,16 @@
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS tracked_flights;
+DROP TABLE IF EXISTS user_details;
 
-CREATE TABLE user (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+CREATE TABLE tracked_flights (
+  email TEXT UNIQUE NOT NULL,
+  aircraft TEXT NOT NULL,
+  carrier TEXT NOT NULL,
+  date_and_time TEXT NOT NULL,
+  PRIMARY KEY(email, aircraft, carrier, date_and_time),
+  FOREIGN KEY (email) REFERENCES user_details (email)
 );
 
-CREATE TABLE post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+CREATE TABLE user_details (
+  email TEXT NOT NULL PRIMARY KEY,
+  gen_code TEXT UNIQUE NOT NULL
 );
