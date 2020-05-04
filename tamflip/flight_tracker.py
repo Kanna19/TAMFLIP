@@ -2,8 +2,9 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from tamflip.db import get_db
 
-def send_email(receiver_email, details=None):
+def send_email(receiver_email, details=''):
     """
     Function to send email to the given receiver email id.
     Provide sender credentials in the file credentials.txt
@@ -20,10 +21,7 @@ def send_email(receiver_email, details=None):
     message['To'] = receiver_email
 
     # Create the plain-text and HTML version of your message
-    text = """\
-    Email from python script boi.
-    This is the text part.
-    """
+    text = details
     html = """\
     <html>
       <body>
@@ -31,7 +29,7 @@ def send_email(receiver_email, details=None):
            This is the html part.<br>
            <a href="https://www.youtube.com/watch?v=RcMQuy1ObeY"> Check this out!! </a>
         </p>
-        <h1> boi </h1>
+        <h3> Sent from apscheduler triggered cron job. Jai kc </h3>
       </body>
     </html>
     """
@@ -54,9 +52,34 @@ def send_email(receiver_email, details=None):
         server.sendmail(sender_email, receiver_email, message.as_string())
         print('Sent email to %s' % receiver_email)
 
-def send_alerts_to_subscribed_users():
-    # TODO:
-    # 1. Read user subsricption database
-    # 2. Send api requests.
-    # 3. send email updates.
-    pass
+def get_tracked_flights(app):
+    """Generator function to get the tracked flight details"""
+    with app.app_context():
+        db = get_db()
+        tracked_flights = db.execute(
+            'SELECT email, aircraft, carrier, date_and_time, prev_price '
+            'FROM tracked_flights'
+        ).fetchall()
+        for row in tracked_flights:
+            yield {'email': row[0],
+                   'aircraft': row[1],
+                   'carrier': row[2],
+                   'date_and_time': row[3],
+                   'prev_price': row[4]}
+
+def send_alerts_to_subscribed_users(app):
+    print('Started Cron job which handles sending updates to users')
+    for tracked_flight_details in get_tracked_flights(app):
+        # TODO: Send api requests.
+        send_email(
+            tracked_flight_details['email'],
+            """
+            Aircraft: {}
+            Carrier: {}
+            Date and time: {}
+            Previous price: {}
+            """.format(tracked_flight_details['aircraft'],
+                       tracked_flight_details['carrier'],
+                       tracked_flight_details['date_and_time'],
+                       tracked_flight_details['prev_price'])
+        )
