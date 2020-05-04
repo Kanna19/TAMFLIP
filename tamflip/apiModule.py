@@ -30,6 +30,13 @@ def getFlightDetails(formObject):
 	urlGetFlight += '&currencyCode='+'INR'+'&nonStop=true'
 	xGetFlight = requests.get(urlGetFlight, headers={'Authorization': 'Bearer '+ str(accessToken)} )
 	yGetFlight = xGetFlight.json()
+	# In case request is invalid/no response from server
+	if(yGetFlight.get("errors") != None):
+		return []
+	# In case of no flights detected
+	if(yGetFlight['meta']['count']==0):
+		return []
+	# We get a success response
 	flightDetails = preprocessJson(yGetFlight)
 	return flightDetails
 
