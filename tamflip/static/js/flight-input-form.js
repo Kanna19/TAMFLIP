@@ -27,12 +27,14 @@ $(".type31").on("click", function(){
   $("#type3").text("Round Trip");
   $(".hiddenInput2").val("Round Trip");
   $("#returnDate").removeClass("info-21");
+  $("#returnDate").addClass("info-22");
 });
 
 $(".type32").on("click", function(){
   $("#type3").text("One-way");
   $(".hiddenInput2").val("One way");
   $("#returnDate").addClass("info-21");
+  $("#returnDate").removeClass("info-22");
 });
 
 $(".passenger").on("click", function(){

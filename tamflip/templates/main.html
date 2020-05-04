@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet"> 
     <title>TAMFLIP</title>
   </head>
   <body>
@@ -85,8 +87,12 @@
               <input type="text" class="info-1" name="destinationLocation" value="" required placeholder="Destination">
             </div>
             <div class="bottom-right">
-              <input type="date" class="info-2" name="Travel Date" value="Travel Date" required placeholder="Travel Date">
-              <input type="date" id="returnDate" class="info-2 info-21" name="Return Date" value="Return Date" placeholder="Return Date">
+              <label for="Travel Date">Travel Date: </label>
+              <input type="date" class="info-2" name="Travel Date" value="Travel Date"  required  placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
+            </div>
+            <div id="returnDate" class="info-21">
+              <label id="labelForReturnDate" for="Return Date">Return Date: </label>
+              <input type="date"  class="info-2" name="Return Date" value="Return Date" placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
             <div class="btn">
               <input class="button1" type="submit" name="" value="Search">
