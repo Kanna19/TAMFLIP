@@ -19,5 +19,9 @@ CREATE TABLE tracked_flights (
 );
 
 INSERT INTO user_details VALUES ("flightapi@yandex.com", "prothin");
+INSERT INTO user_details VALUES ("chaitu7261998@gmail.com", "prokc");
+INSERT INTO user_details VALUES ("kannasasuke19@gmail.com", "bot");
 
 INSERT INTO tracked_flights VALUES ("flightapi@yandex.com", "DH8", "H1", "2020-05-12T11:10:00", "15832.00");
+INSERT INTO tracked_flights VALUES ("chaitu7261998@gmail.com", "DH8", "H1", "2020-05-12T11:10:00", "15832.00");
+INSERT INTO tracked_flights VALUES ("kannasasuke19@gmail.com", "DH8", "H1", "2020-05-12T11:10:00", "15832.00");
