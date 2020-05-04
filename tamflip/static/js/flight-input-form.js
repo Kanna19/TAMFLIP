@@ -5,22 +5,34 @@
 
 $(".type21").on("click", function(){
   $("#type2").text("Economy");
-  $(".hiddenInput").val("Economy");
+  $(".hiddenInput1").val("Economy");
 });
 
 $(".type22").on("click", function(){
   $("#type2").text("Premium Economy");
-  $(".hiddenInput").val("Premium Economy");
+  $(".hiddenInput1").val("Premium Economy");
 });
 
 $(".type23").on("click", function(){
   $("#type2").text("Business");
-  $(".hiddenInput").val("Business");
+  $(".hiddenInput1").val("Business");
 });
 
 $(".type24").on("click", function(){
   $("#type2").text("First Class");
-  $(".hiddenInput").val("First Class");
+  $(".hiddenInput1").val("First Class");
+});
+
+$(".type31").on("click", function(){
+  $("#type3").text("Round Trip");
+  $(".hiddenInput2").val("Round Trip");
+  $("#returnDate").removeClass("info-21");
+});
+
+$(".type32").on("click", function(){
+  $("#type3").text("One-way");
+  $(".hiddenInput2").val("One way");
+  $("#returnDate").addClass("info-21");
 });
 
 $(".passenger").on("click", function(){
