@@ -26,12 +26,23 @@ def init_db():
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+    val = db.execute('SELECT * FROM user_details').fetchall()
+    for i in val:
+        print(tuple(i))
+
+    val = db.execute('SELECT * FROM tracked_flights').fetchall()
+    for i in val:
+        print(tuple(i))
+
+    db.commit()
+
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
     "Clear DB and make new DB"
     #TODO: Can we replace init_db_command with init_db???
     init_db()
+
     click.echo('Initalized Databse')
 
 #Function to link app with these functions
