@@ -3,6 +3,7 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from tamflip.db import get_db
+from . import api_module
 
 def send_email(receiver_email, details=''):
     """
@@ -56,30 +57,42 @@ def get_tracked_flights(app):
     """Generator function to get the tracked flight details"""
     with app.app_context():
         db = get_db()
-        tracked_flights = db.execute(
-            'SELECT email, aircraft, carrier, date_and_time, prev_price '
-            'FROM tracked_flights'
-        ).fetchall()
-        for row in tracked_flights:
-            yield {'email': row[0],
-                   'aircraft': row[1],
-                   'carrier': row[2],
-                   'date_and_time': row[3],
-                   'prev_price': row[4]}
+        cursor = db.execute('SELECT * FROM tracked_flights')
+        column_names = list(map(lambda x: x[0], cursor.description))
+        for row in cursor.fetchall():
+            yield {
+                k: v
+                for k, v in zip(column_names, tuple(row))
+            }
 
 def send_alerts_to_subscribed_users(app):
     print('Started Cron job which handles sending updates to users')
     for tracked_flight_details in get_tracked_flights(app):
-        # TODO: Send api requests.
-        send_email(
-            tracked_flight_details['email'],
-            """
-            Aircraft: {}
-            Carrier: {}
-            Date and time: {}
-            Previous price: {}
-            """.format(tracked_flight_details['aircraft'],
-                       tracked_flight_details['carrier'],
-                       tracked_flight_details['date_and_time'],
-                       tracked_flight_details['prev_price'])
+        flight_details, price_details = api_module.query_tracked_flight(
+            tracked_flight_details
         )
+        # Flight not found.
+        # TODO: Handle this case properly
+        if flight_details is None:
+            continue
+
+        print('Flight details retrieved.')
+
+        # Dummy email body
+        email_body = (
+            tracked_flight_details['from_location']
+            + ' to '
+            + tracked_flight_details['to_location'] + '\n'
+            + '\n'.join([(k + ': ' + v) for k, v in flight_details[0].items()])
+        )
+
+        if len(flight_details) == 2:
+            email_body += (
+                '\n' + tracked_flight_details['to_location']
+                + ' to '
+                + tracked_flight_details['from_location'] + '\n'
+                + '\n'.join([(k + ': ' + v) for k, v in flight_details[1].items()])
+            )
+
+        email_body += '\nCost: ' + price_details
+        send_email(tracked_flight_details['email'], email_body)
