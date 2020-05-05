@@ -20,6 +20,17 @@ def check_valid_token():
 		return True 
 	return False
 
+def class_of_travel(form_object, str):
+	if(form_object['type_of_class'] =='Economy'):
+		str+='&travelClass='+'ECONOMY'
+	elif(form_object['type_of_class'] =='Premium Economy'):
+		str+='&travelClass='+'PREMIUM_ECONOMY'
+	elif(form_object['type_of_class'] =='Business'):
+		str+='&travelClass='+'BUSINESS'
+	elif(form_object['type_of_class'] =='First Class'):
+		str+='&travelClass='+'FIRST'
+	return str
+
 # makes a call and returns the flightDetails filled in the form
 def get_flight_details(form_object): 
 	access_token = get_token()
@@ -30,8 +41,11 @@ def get_flight_details(form_object):
 	# check for One-way or not
 	if(form_object['type_of_trip'] != 'One way'):
 		url_get_flight +='&returnDate='+form_object['return_date']
+	# add class of travel 
+	url_get_flight = class_of_travel(form_object, url_get_flight)
+	# add number of passengers
 	url_get_flight += '&adults='+form_object['adults']+'&children='+form_object['children']+'&infants='+form_object['infants']
-	url_get_flight += '&currencyCode='+'INR'+'&nonStop=true'
+	url_get_flight += '&currencyCode='+'INR'
 	# input to post request
 	x_get_flight = requests.get(url_get_flight, headers={'Authorization': 'Bearer '+ str(access_token)} )
 	y_get_flight = x_get_flight.json()
@@ -70,5 +84,3 @@ def preprocess_json(my_object):
 		price_details.append(obj['price']['total'])
 		flight_details.append(temp_list)
 	return (flight_details,price_details)
-
-# ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST
