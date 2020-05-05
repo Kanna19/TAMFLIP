@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
     <title>TAMFLIP</title>
   </head>
   <body>
@@ -94,36 +94,63 @@
               <label id="labelForReturnDate" for="Return Date">Return Date: </label>
               <input type="date"  class="info-2" name="return_date" value="Return Date" placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
-            <div class="btn">
+            <div class="btn" id="submit">
               <input class="button1" type="submit" name="" value="Search">
             </div>
           </div>
 
         </form>
-
-        <div class="load">
-          <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-          </ul>
-        </div>
-
-
       </section>
     </div>
 
     {%for (flight, price) in zip(flight_details, price_details)%}
+
+    <!-- if(i == 0) -->
+    <!-- <div class="filter top info-21">
+      <ul>
+      <div class="dropdown cls">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span id="type4">Filter</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item type21" type="button">Filter-1</button>
+          <button class="dropdown-item type22" type="button">Filter-2</button>
+        </div>
+      </div>
+
+      <div class="dropdown cls">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span id="type5">Sort</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item type32" type="button">Sort-1</button>
+          <button class="dropdown-item type31" type="button">Sort-2</button>
+        </div>
+      </div>
+    </div> -->
+    <!-- i++ -->
+
+
+
+
       <div class ="flight-box">
-      {%for trip in flight%}
-         <span class="fbox1">{{trip['carrier_name']}}</span>
-         <span class="fbox2">{{trip['departure_time']}} - {{trip['arrival_time']}} </span>
-         <span class="fbox3">{{trip['duration']}} </span>
-      {% endfor %}
-         <span class="fbox4">&#8377;{{price}}</span>
+        {%for trip in flight%}
+        <!-- <div class="row align-items-center"> -->
+          <!-- <div class="col">{{trip['carrier_name']}}</div>
+          <div class="col-3">{{trip['departure_time']}}</div>
+          <div class="col-3">{{trip['arrival_time']}} </div>
+          <div class="col">{{trip['duration']}} </div> -->
+          <div class="fbox1">
+            <span class="fbox">{{trip['carrier_name']}}</span>
+            <span class="fbox2">{{trip['arrival_time']}} </span>
+            <span class="fbox2">{{trip['arrival_time']}} </span>
+            <span class="fbox3">{{trip['duration']}} </span>
+            <hr>
+          </div>
+        {% endfor %}
+          <div class="price">&#8377;{{price}}</div>
+          <!-- <div class="fbox2 col">&#8377;{{price}}</div> -->
+        </div>
       </div>
     {% endfor %}
 
