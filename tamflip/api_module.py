@@ -70,3 +70,5 @@ def preprocess_json(my_object):
 		price_details.append(obj['price']['total'])
 		flight_details.append(temp_list)
 	return (flight_details,price_details)
+
+# ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST

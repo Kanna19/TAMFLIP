@@ -31,18 +31,18 @@
 
             <div class="dropdown cls">
               <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="type1Num" name="numOfPassengers">1</span> <span id="type1Txt">Passenger</span>
+                <span id="type1Num" name="num_of_passengers">1</span> <span id="type1Txt">Passenger</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
                 <label for="Adults">Adults : </label>
-                <input class="adlt" type="number" name="Adults" value="1" min="1">
+                <input class="adlt" type="number" name="adults" value="1" min="1">
 
                 <label for="Childs">Childs : </label>
-                <input class="chld" type="number" name="Childs" value="0" min="0">
+                <input class="chld" type="number" name="children" value="0" min="0">
 
                 <label for="Infants">Infants:</label>
-                <input class="inft" type="number" name="Infants" value="0" min="0">
+                <input class="inft" type="number" name="infants" value="0" min="0">
 
                 <div class="btn">
                   <input class="button1 passenger" type="button" name="" value="Apply">
@@ -51,7 +51,7 @@
               </div>
             </div>
 
-            <input class="hiddenInput1" type="hidden" name="typeOfClass" value="Economy">
+            <input class="hiddenInput1" type="hidden" name="type_of_class" value="Economy">
 
             <div class="dropdown cls">
               <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,7 +66,7 @@
             </div>
 
 
-            <input class="hiddenInput2" type="hidden" name="typeOfTrip" value="One way">
+            <input class="hiddenInput2" type="hidden" name="type_of_trip" value="One way">
 
             <div class="dropdown cls">
               <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,16 +83,16 @@
 
           <div class="bottom">
             <div class="bottom-left">
-              <input type="text" class="info-1" name="fromLocation" value="" required placeholder="From">
-              <input type="text" class="info-1" name="destinationLocation" value="" required placeholder="Destination">
+              <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
+              <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination">
             </div>
             <div class="bottom-right">
               <label for="Travel Date">Travel Date: </label>
-              <input type="date" class="info-2" name="Travel Date" value="Travel Date"  required  placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
+              <input type="date" class="info-2" name="departure_date" value="Travel Date"  required  placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
             <div id="returnDate" class="info-21">
               <label id="labelForReturnDate" for="Return Date">Return Date: </label>
-              <input type="date"  class="info-2" name="Return Date" value="Return Date" placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
+              <input type="date"  class="info-2" name="return_date" value="Return Date" placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
             <div class="btn">
               <input class="button1" type="submit" name="" value="Search">
@@ -114,9 +114,18 @@
 
 
       </section>
-
-
     </div>
+
+    {%for (flight, price) in zip(flight_details, price_details)%}
+      <div class ="flight-box">
+      {%for trip in flight%}
+         <span class="fbox1">{{trip['carrierName']}}</span>
+         <span class="fbox2">{{trip['departureTime']}} - {{trip['arrivalTime']}} </span>
+         <span class="fbox3">{{trip['duration']}} </span>
+      {% endfor %}
+         <span class="fbox4">&#8377;{{price}}</span>
+      </div>
+    {% endfor %}
 
     <script type="text/javascript" src="{{url_for('static', filename='js/assets/jQuery-3.4.1.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/flight-input-form.js')}}"></script>

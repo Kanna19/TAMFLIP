@@ -151,3 +151,24 @@
 .info-21{
   display: none;
 }
+
+.flight-box{
+  width : 95%;
+  border : 2px solid rgb(203, 203, 203);
+  border-radius: 5px;
+  margin : 10px auto;
+  box-shadow: 5px 2px 2px gray;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.fbox1{
+
+}
+.fbox2{
+  
+}
+.fbox3{
+  
+}
+.fbox4{
+  color:green;
+}
