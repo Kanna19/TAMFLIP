@@ -129,7 +129,12 @@
         </div>
       </div>
       <!-- <h1>Hoi</h1> -->
-
+      <div class="flight-header">
+        <span class="box1">Carrier</span>
+        <span class="box2">Departure Time</span>
+        <span class="box2">Arrival Time </span>
+        <span class="box3">Duration </span>
+      </div>
     {% endif %}
 
     {%for (flight, price) in zip(flight_details, price_details)%}
@@ -145,8 +150,8 @@
           <div class="col">{{trip['duration']}} </div> -->
           <div class="fbox1">
             <span class="fbox">{{trip['carrier_name']}}</span>
-            <span class="fbox2">{{trip['arrival_time']}} </span>
             <span class="fbox2">{{trip['departure_time']}} </span>
+            <span class="fbox2">{{trip['arrival_time']}} </span>
             <span class="fbox3">{{trip['duration']}} </span>
             <hr>
           </div>

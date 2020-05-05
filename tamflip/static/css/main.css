@@ -167,6 +167,28 @@
   padding-bottom: 15px;
 }
 
+
+.flight-header{
+  width : 900px;
+  height: 30px;
+  border : 2px solid rgb(203, 203, 203);
+  text-align: center;
+  border-radius: 5px;
+  margin : 15px auto;
+  font-family: 'Josefin Sans', sans-serif;
+  line-height: 10px;
+  padding-top: 10px;
+  background: rgb(230, 230, 230);
+}
+
+.flight-header span{
+  padding-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 15px;
+}
+
+
 .fbox1{
   margin-top: 10px;
   margin-bottom: 5px;
