@@ -53,3 +53,7 @@ $(".passenger").on("click", function(){
     $("#type1Txt").text("Passengers");
   }
 });
+
+$("#submit").on("click", function(){
+  $(".filter").removeClass("info-21");
+});

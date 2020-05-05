@@ -153,22 +153,53 @@
 }
 
 .flight-box{
-  width : 95%;
+  width : 900px;
+  height: 130px;
   border : 2px solid rgb(203, 203, 203);
   border-radius: 5px;
   margin : 10px auto;
   box-shadow: 5px 2px 2px gray;
   font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  line-height: 20px;
+  vertical-align: middle;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
-.fbox1{
 
+.fbox1{
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
-.fbox2{
-  
+
+.fbox1 span{
+  padding: 10px 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* float: left; */
 }
-.fbox3{
-  
-}
-.fbox4{
+
+/* .flight-box .row {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+} */
+
+.price{
+  width: 100px;
+  margin: 10px auto;
   color:green;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border: 1px solid rgb(200,200, 200);
+  border-radius: 5px;
+  background: rgb(230, 230, 230);
+  /* float: right; */
+}
+
+hr{
+  padding: 0 0;
+  margin: 1px auto;
+  width: 70%;
+
 }
