@@ -108,25 +108,36 @@
     {% if request.method == 'POST'%}
       <div class="filter top">
         <ul>
-        <div class="dropdown cls">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span id="type4">Filter</span>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item type21" type="button">Filter-1</button>
-            <button class="dropdown-item type22" type="button">Filter-2</button>
+          <div class="dropdown cls">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="type5">Sort</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item type21" type="button">Price</button>
+              <button class="dropdown-item type22" type="button">Duration</button>
+              <button class="dropdown-item type22" type="button">Departure Time</button>
+              <button class="dropdown-item type22" type="button">Arrival Time</button>
+            </div>
           </div>
-        </div>
+          <div class="dropdown cls">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="type4">Filter</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-        <div class="dropdown cls">
-          <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span id="type5">Sort</span>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item type32" type="button">Sort-1</button>
-            <button class="dropdown-item type31" type="button">Sort-2</button>
+              <!-- <div class="range-wrap">
+                <input type="range" class="range" min="20" max="940">
+                <output class="bubble"></output>
+              </div> -->
+
+              <!-- <input type="range" min="1000" max="500000" value="50" class="slider" id="myRange"> -->
+
+              <button class="dropdown-item type21" type="button">Price Range</button>
+              <button class="dropdown-item type22" type="button">Duration</button>
+              <button class="dropdown-item type22" type="button">Departure Time</button>
+              <button class="dropdown-item type22" type="button">Arrival Time</button>
+            </div>
           </div>
-        </div>
       </div>
       <!-- <h1>Hoi</h1> -->
       <div class="flight-header">
