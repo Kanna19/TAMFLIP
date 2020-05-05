@@ -14,13 +14,14 @@ CREATE TABLE tracked_flights (
   carrier_code TEXT NOT NULL,
   adults TEXT NOT NULL,
   children TEXT NOT NULL,
+  infants TEXT NOT NULL,
   from_location TEXT NOT NULL,
   to_location TEXT NOT NULL,
   departure_date TEXT NOT NULL,
-  return_date TEXT, 
+  return_date TEXT,
   type_of_class TEXT NOT NULL,
   prev_price TEXT NOT NULL,
-  PRIMARY KEY(email, aircraft, carrier, departure_date),
+  PRIMARY KEY(email, aircraft_code, carrier_code, departure_date),
   FOREIGN KEY (email) REFERENCES user_details (email)
 );
 
@@ -28,6 +29,5 @@ INSERT INTO user_details VALUES ("flightapi@yandex.com", "prothin");
 INSERT INTO user_details VALUES ("chaitu7261998@gmail.com", "prokc");
 INSERT INTO user_details VALUES ("kannasasuke19@gmail.com", "bot");
 
-INSERT INTO tracked_flights VALUES ("flightapi@yandex.com", "DH8", "H1","1","1","0", "HYD", "BLR", "2020-05-27", "2020-05-30", "Business",  "15832.00");
-INSERT INTO tracked_flights VALUES ("chaitu7261998@gmail.com", "DH8", "H1","1","1","0", "HYD", "BLR", "2020-05-27", "2020-05-30", "Business",  "15832.00");
-INSERT INTO tracked_flights VALUES ("kannasasuke19@gmail.com", "DH8", "H1","1","1","0", "HYD", "MAA", "2020-05-27", "2020-05-30", "Business",  "15832.00");
+INSERT INTO tracked_flights VALUES ("chaitu7261998@gmail.com", "319", "AI", "1", "0", "0", "HYD", "BLR", "2020-05-22", "2020-05-27", "Business", "26674");
+INSERT INTO tracked_flights VALUES ("kannasasuke19@gmail.com", "32B", "AI", "2", "1", "0", "HYD", "BLR", "2020-05-23", NULL, "Business", "37237");

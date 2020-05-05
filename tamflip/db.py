@@ -43,7 +43,7 @@ def init_db_command():
     #TODO: Can we replace init_db_command with init_db???
     init_db()
 
-    click.echo('Initalized Databse')
+    click.echo('Initalized Database')
 
 #Function to link app with these functions
 def init_app(app):
