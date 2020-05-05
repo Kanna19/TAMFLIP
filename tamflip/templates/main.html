@@ -161,9 +161,9 @@
           <div class="col">{{trip['duration']}} </div> -->
           <div class="fbox1">
             <span class="fbox">{{trip['carrier_name']}}</span>
-            <span class="fbox2">{{trip['departure_time']}} </span>
-            <span class="fbox2">{{trip['arrival_time']}} </span>
-            <span class="fbox3">{{trip['duration']}} </span>
+            <span class="fbox2">{{trip['departure_time'].strftime('%a, %b %d %I:%M %p')}} </span>
+            <span class="fbox2">{{trip['arrival_time'].strftime('%a, %b %d %I:%M %p')}} </span>
+            <span class="fbox3">{{'{:02}h {:02}m'.format(trip['duration'].seconds//3600, (trip['duration'].seconds % 3600) // 60)}} </span>
             <hr>
           </div>
         {% endfor %}

@@ -1,5 +1,6 @@
 import requests
 import json
+import isodate
 
 # Getting an access token given API_KEY and API_SECRET
 def get_token():
@@ -31,31 +32,6 @@ def class_of_travel(travel_class):
 		'Business': 'BUSINESS',
 		'First Class': 'FIRST'
 	}[travel_class]
-
-def process_time(ftime):
-	det = ''
-	val = int(ftime[0:2])
-	if(val>12):
-		val%=12
-		det+=' PM'
-	elif(val==12):
-		det+=' PM'
-	elif(val==0):
-		det+=' AM'
-		val+=12
-	elif(val< 12):
-		det+=' AM'
-	return str(val)+ftime[2:]+det	
-
-def process_date_time(date_time):
-	year = date_time[0:4]
-	month = date_time[5:7]
-	day = date_time[8:10]
-	time = 	date_time[11:16]
-	return day+'-'+month+'-'+year+' '+process_time(time)
-
-def process_duration(duration):
-	return duration[2:].lower()
 
 # makes a call and returns the flightDetails filled in the form
 def get_flight_details(form_object):
@@ -111,9 +87,9 @@ def preprocess_json(form_object, my_object):
 		# stores one round trip if there
 		for itineraries in obj['itineraries']:
 			temp_dict = {}
-			temp_dict['duration'] = process_duration(itineraries['duration'])
-			temp_dict['departure_time'] = process_date_time(itineraries['segments'][0]['departure']['at'])
-			temp_dict['arrival_time'] = process_date_time(itineraries['segments'][0]['arrival']['at'])
+			temp_dict['duration'] = isodate.parse_duration(itineraries['duration'])
+			temp_dict['departure_time'] = isodate.parse_datetime(itineraries['segments'][0]['departure']['at'])
+			temp_dict['arrival_time'] = isodate.parse_datetime(itineraries['segments'][0]['arrival']['at'])
 			temp_dict['carrier_code'] = itineraries['segments'][0]['carrierCode']
 			temp_dict['carrier_name'] = carrier_map[temp_dict['carrier_code']]
 			temp_dict['aircraft_code'] = itineraries['segments'][0]['aircraft']['code']
