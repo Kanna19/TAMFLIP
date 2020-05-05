@@ -102,6 +102,12 @@ def preprocess_json(form_object, my_object):
 def query_tracked_flight(user_object):
 	flight_details, price_details = get_flight_details(user_object)
 	for i, flight in enumerate(flight_details):
-		if (flight[0]['carrier_code'] == user_object['carrier_code']
-			and flight[0]['aircraft_code'] == user_object['aircraft_code']):
-			return flight, price_details[i]
+		if (flight[0]['carrier_code'] == user_object['dept_carrier_code']
+			and flight[0]['aircraft_code'] == user_object['dept_aircraft_code']):
+		# for round trip, checking the return flight details too
+			if(len(flight)==2):
+				if(flight[1]['carrier_code'] == user_object['return_carrier_code']
+					and flight[1]['aircraft_code'] == user_object['return_aircraft_code']):
+					return flight, price_details[i]
+			else :
+				return flight, price_details[i]
