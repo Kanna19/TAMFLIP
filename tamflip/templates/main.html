@@ -105,10 +105,7 @@
 
 
     <!-- <h2>i = {{i}}</h2> -->
-
-    {%for (flight, price) in zip(flight_details, price_details)%}
-
-    {% if i%}
+    {% if request.method == 'POST'%}
       <div class="filter top">
         <ul>
         <div class="dropdown cls">
@@ -132,8 +129,12 @@
         </div>
       </div>
       <!-- <h1>Hoi</h1> -->
-      {% set i = False %}
+
     {% endif %}
+
+    {%for (flight, price) in zip(flight_details, price_details)%}
+
+
 
       <div class ="flight-box">
         {%for trip in flight%}
