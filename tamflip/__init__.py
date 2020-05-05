@@ -4,7 +4,7 @@ from flask import Flask
 from flask import render_template
 from flask import request, g
 
-from . import apiModule
+from . import api_module
 from . import flight_tracker
 
 from apscheduler.jobstores.memory import MemoryJobStore
@@ -21,6 +21,8 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'tamflip.sqlite'),
 
     )
+    # to add zip functionality to jinja
+    app.jinja_env.globals.update(zip=zip)
 
     # Ensure instance folder exists
     try:
