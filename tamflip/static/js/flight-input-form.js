@@ -54,6 +54,6 @@ $(".passenger").on("click", function(){
   }
 });
 
-$("#submit").on("click", function(){
-  $(".filter").removeClass("info-21");
-});
+// $("#submit").on("click", function(){
+//   $(".filter").removeClass("info-21");
+// });

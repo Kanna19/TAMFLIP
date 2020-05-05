@@ -11,4 +11,4 @@ def index():
 
 	if request.method == 'POST':
 		(flight_details, price_details) = api_module.get_flight_details(request.form)
-		return render_template('main.html', flight_details=flight_details, price_details = price_details)
+		return render_template('main.html', flight_details=flight_details, price_details = price_details, i=True, j=True, k=True)

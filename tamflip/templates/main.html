@@ -103,35 +103,37 @@
       </section>
     </div>
 
+
+    <!-- <h2>i = {{i}}</h2> -->
+
     {%for (flight, price) in zip(flight_details, price_details)%}
 
-    <!-- if(i == 0) -->
-    <!-- <div class="filter top info-21">
-      <ul>
-      <div class="dropdown cls">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span id="type4">Filter</span>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item type21" type="button">Filter-1</button>
-          <button class="dropdown-item type22" type="button">Filter-2</button>
+    {% if i%}
+      <div class="filter top">
+        <ul>
+        <div class="dropdown cls">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span id="type4">Filter</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item type21" type="button">Filter-1</button>
+            <button class="dropdown-item type22" type="button">Filter-2</button>
+          </div>
+        </div>
+
+        <div class="dropdown cls">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span id="type5">Sort</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item type32" type="button">Sort-1</button>
+            <button class="dropdown-item type31" type="button">Sort-2</button>
+          </div>
         </div>
       </div>
-
-      <div class="dropdown cls">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span id="type5">Sort</span>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item type32" type="button">Sort-1</button>
-          <button class="dropdown-item type31" type="button">Sort-2</button>
-        </div>
-      </div>
-    </div> -->
-    <!-- i++ -->
-
-
-
+      <!-- <h1>Hoi</h1> -->
+      {% set i = False %}
+    {% endif %}
 
       <div class ="flight-box">
         {%for trip in flight%}
@@ -143,7 +145,7 @@
           <div class="fbox1">
             <span class="fbox">{{trip['carrier_name']}}</span>
             <span class="fbox2">{{trip['arrival_time']}} </span>
-            <span class="fbox2">{{trip['arrival_time']}} </span>
+            <span class="fbox2">{{trip['departure_time']}} </span>
             <span class="fbox3">{{trip['duration']}} </span>
             <hr>
           </div>
