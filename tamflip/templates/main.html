@@ -119,8 +119,8 @@
     {%for (flight, price) in zip(flight_details, price_details)%}
       <div class ="flight-box">
       {%for trip in flight%}
-         <span class="fbox1">{{trip['carrierName']}}</span>
-         <span class="fbox2">{{trip['departureTime']}} - {{trip['arrivalTime']}} </span>
+         <span class="fbox1">{{trip['carrier_name']}}</span>
+         <span class="fbox2">{{trip['departure_time']}} - {{trip['arrival_time']}} </span>
          <span class="fbox3">{{trip['duration']}} </span>
       {% endfor %}
          <span class="fbox4">&#8377;{{price}}</span>
