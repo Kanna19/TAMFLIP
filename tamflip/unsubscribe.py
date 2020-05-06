@@ -7,24 +7,20 @@ bp = Blueprint('unsubscribe', __name__, url_prefix="/unsubscribe")
 
 @bp.route('/<token>', methods=['GET', 'POST'])
 def index(token):
+
+    # Token verification
+    with open('credentials.txt') as f:
+        credentials = {k: v for k, v in map(str.split, f.readlines())}
+        server_secret = credentials['SERVER_SECRET']
+
+    serializer = URLSafeSerializer(server_secret, salt='unsubscribe')
+    try:
+        email = serializer.loads(token)
+    except BadData as e:
+        return 'Invalid token provided'
+
     # Display unsubscribe page
     if request.method == 'GET':
-        print("---!BUMPER!---")
-
-        with open('credentials.txt') as f:
-            credentials = {k: v for k, v in map(str.split, f.readlines())}
-            server_secret = credentials['SERVER_SECRET']
-
-        # Verify token
-        serializer = URLSafeSerializer(server_secret, salt='unsubscribe')
-        try:
-            email = serializer.loads(token)
-        except BadData as e:
-            print(e)
-            return 'Invalid token provided'
-
-        #email = "dummyboi@dummyboi.com"
-
         # Get tracked flights
         db = get_db()
         cursor = db.execute(
@@ -40,14 +36,14 @@ def index(token):
             {k: v for k, v in zip(column_names, tuple(row))}
             for row in cursor.fetchall()
         ]
-        print(flight_details)
-        #return 'Bobby is ready with flight details'
         return render_template(
             'unsubscribe.html',
             flight_details=flight_details
         )
 
     # Take user input, unsubscribe and display confirmation
-    if request.methods == 'POST':
-        # TODO
-        pass
+    if request.method == 'POST':
+        print("-----GOT REQ TO UNSUB-----")
+        for i in request.form.items():
+            print(i)
+        return "Your alerts have been ammended!!!"
