@@ -14,7 +14,7 @@ def index():
 	if request.method == 'GET':
 		return render_template('main.html', airport_codes=airport_codes)
 
-	if request.method == 'POST'
+	if request.method == 'POST':
 		if(request.form["submit"] =="search"):
 			# clear out any files created with session variables if any.
 			flight_details, price_details = api_module.get_flight_details(request.form)
