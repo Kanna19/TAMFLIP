@@ -4,7 +4,7 @@
   margin-bottom: 5px;
 }
 
-.fbox1 span{
+.fbox2{
   padding: 10px 10px;
   margin-left: 20px;
   margin-right: 20px;
@@ -61,7 +61,7 @@
     font-size: 15px;
 }
 .box_class {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     margin-left: 30px;
     margin-right: 30px;
     font-size: 15px;
@@ -110,7 +110,7 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 80px;
+  width: 40px;
   height: 20px;
 }
 
@@ -167,4 +167,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+#price {
+
 }
