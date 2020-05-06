@@ -1,16 +1,20 @@
 INSERT INTO tracked_flights
   VALUES
-    (NULL,"kannasasuke19@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
+    (1,"kannasasuke19@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
       "2020-05-22", "2020-05-27", "Business", "37237"),
-    (NULL,"chaitu7261998@gmail.com", "319", "AI","319", "AI", "1", "0", "0", "HYD", "BLR",
+    (2,"chaitu7261998@gmail.com", "319", "AI","319", "AI", "1", "0", "0", "HYD", "BLR",
       "2020-05-22", "2020-05-27", "Business", "26674"),
-    (NULL,"re1nth98@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
+    (3,"re1nth98@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
       "2020-05-22", "2020-05-27", "Business", "37237"),
-    (NULL,"ramanudeepp@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
+    (4,"ramanudeepp@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
       "2020-05-22", "2020-05-27", "Business", "37237"),
-    (NULL,"dummyboi@dummyboi.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
+    (5,"dummyboi@dummyboi.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
       "2020-05-05", NULL, "Business", "37237"),
-    (NULL,"dummyboi@dummyboi.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
+    (6,"dummyboi@dummyboi.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
       "2020-05-03", "2020-05-05", "Business", "37237"),
-    (NULL,"dummyboi@dummyboi.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
-      "2020-05-01", "2020-05-22", "Business", "37237");
+    (7,"dummyboi@dummyboi.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR",
+      "2020-05-01", "2020-05-22", "Business", "37237"),
+    (8,"testboi@testboicom", "42", "Flight1", "XX", "BC", "10", "1", "0", "NYC", "CAN",
+      "2020-05-12", "2020-05-30", "Economy", "2312111"),
+    (9,"testboi@testboicom", "42", "Flight2", "XX", "BC", "10", "1", "0", "NYC", "CAN",
+      "2020-05-12", "2020-05-30", "Economy", "2312111");
