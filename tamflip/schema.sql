@@ -9,12 +9,12 @@ CREATE TABLE user_details (
 );
 
 CREATE TABLE tracked_flights (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT UNIQUE NOT NULL,
+  id INTEGER PRIMARY KEY,
+  email TEXT NOT NULL,
   dept_aircraft_code TEXT NOT NULL,
   dept_carrier_code TEXT NOT NULL,
   return_aircraft_code TEXT,
-  return_carrier_code TEXT, 
+  return_carrier_code TEXT,
   adults TEXT NOT NULL,
   children TEXT NOT NULL,
   infants TEXT NOT NULL,
@@ -31,7 +31,6 @@ INSERT INTO user_details VALUES ("chaitu7261998@gmail.com", "prokc");
 INSERT INTO user_details VALUES ("kannasasuke19@gmail.com", "prothin");
 INSERT INTO user_details VALUES ("re1nth98@gmail.com", "useless");
 INSERT INTO user_details VALUES ("pramanudeep@gmail.com", "prodeep");
-
 
 INSERT INTO tracked_flights VALUES (NULL,"chaitu7261998@gmail.com", "319", "AI","319", "AI", "1", "0", "0", "HYD", "BLR", "2020-05-22", "2020-05-27", "Business", "26674");
 INSERT INTO tracked_flights VALUES (NULL,"kannasasuke19@gmail.com", "319", "AI", "32B", "AI","2", "1", "0", "HYD", "BLR", "2020-05-22", "2020-05-27", "Business", "37237");
