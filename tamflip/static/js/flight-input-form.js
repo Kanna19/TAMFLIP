@@ -54,6 +54,13 @@ $(".passenger").on("click", function(){
   }
 });
 
+$( "button[id*='track']" ).on("click", function(){   
+    var button_id = $(this).attr('id');
+    var num = button_id.substr(5);
+    var input_id = ".hidden-input"+num;
+    $(input_id).toggleClass("hidden-input");
+});
+
 // const allRanges = document.querySelectorAll(".range-wrap");
 // allRanges.forEach(wrap => {
 //   const range = wrap.querySelector(".range");

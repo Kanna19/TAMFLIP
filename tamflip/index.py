@@ -10,12 +10,17 @@ def index():
 		return render_template('main.html')
 
 	if request.method == 'POST':
-		flight_details, price_details = api_module.get_flight_details(request.form)
-		return render_template(
-			'main.html',
-			flight_details=flight_details,
-			price_details=price_details,
-			i=True,
-			j=True,
-			k=True
-		)
+		if(request.form["submit"] =="search"):
+			flight_details, price_details = api_module.get_flight_details(request.form)
+			return render_template(
+				'main.html',
+				flight_details=flight_details,
+				price_details=price_details,
+				i=True,
+				j=True,
+				k=True
+			)
+		else:
+			# see if all the ids' are empty.
+			# see the id which is not empty.
+			return request.form

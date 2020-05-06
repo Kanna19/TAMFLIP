@@ -95,7 +95,7 @@
               <input type="date"  class="info-2" name="return_date" value="Return Date" placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
             <div class="btn" id="submit">
-              <input class="button1" type="submit" name="" value="Search">
+              <input class="button1" type="submit" name="submit" value="search">
             </div>
           </div>
 
@@ -148,13 +148,12 @@
       </div>
     {% endif %}
 
+    <form id ="track-details" method ="post" autocomplete="off">
+    {% set count = namespace(value=0) %}
     {%for (flight, price) in zip(flight_details, price_details)%}
-
-
-
       <div class ="flight-box">
         {%for trip in flight%}
-        <!-- <div class="row align-items-center"> -->
+          <!-- <div class="row align-items-center"> -->
           <!-- <div class="col">{{trip['carrier_name']}}</div>
           <div class="col-3">{{trip['departure_time']}}</div>
           <div class="col-3">{{trip['arrival_time']}} </div>
@@ -168,16 +167,25 @@
           </div>
         {% endfor %}
           <div class="price">&#8377;{{price}}</div>
-          <!-- <div class="fbox2 col">&#8377;{{price}}</div> -->
+          <!-- <input type="text" class="info-1" name="from_location" value="" required placeholder="From"> -->
+          <button class ="track" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
+            <div class = "hidden-input{{count.value}} hidden-input">
+              <input type="text" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
+              <input type ="submit" name="submit" value="track">
+            </div>
         </div>
       </div>
+      {% set count.value = count.value + 1 %}
     {% endfor %}
+    </form>
 
     <script type="text/javascript" src="{{url_for('static', filename='js/assets/jQuery-3.4.1.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/flight-input-form.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   </body>
 </html>

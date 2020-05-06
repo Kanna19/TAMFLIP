@@ -154,7 +154,7 @@
 
 .flight-box{
   width : 900px;
-  height: 130px;
+  min-height: 130px;
   border : 2px solid rgb(203, 203, 203);
   border-radius: 5px;
   margin : 10px auto;
@@ -211,6 +211,7 @@
   width: 100px;
   margin: 10px auto;
   color:green;
+  display: inline-block;
   padding-top: 10px;
   padding-bottom: 5px;
   border: 1px solid rgb(200,200, 200);
@@ -226,7 +227,27 @@ hr{
 
 }
 
+.track {
+  background-color: DodgerBlue; /* Blue background */
+  display: inline-block;
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 8px 14px; /* Some padding */
+  font-size: 13px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
 
+/* Darker background on mouse-over */
+.track:hover {
+  background-color: RoyalBlue;
+}
+
+.email-info{
+  display: inline-block; 
+}
+
+.hidden-input{
+  display: none;
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -389,7 +410,7 @@ input:checked + .slider:before {
 }
 .unsub_button:hover{
     background-color: #4CAF50;
-    color:white;
+    color:white
 }
 
 /* .range-wrap {

@@ -7,5 +7,5 @@ bp = Blueprint('subscribe', __name__, url_prefix="/subscribe")
 def index():
 	# Sessions variables might be better
 	if request.method == 'GET':
-		# TODO
+    # TODO
 		return 'TODO'
