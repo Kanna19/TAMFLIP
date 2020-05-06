@@ -43,26 +43,6 @@ def index(token):
 
     # Take user input, unsubscribe and display confirmation
     if request.method == 'POST':
-        """
-        db = get_db()
-
-        row_ids = request.form.get('ids', [])
-        for row_id in row_ids:
-            cursor = db.execute(
-                """
-                SELECT *
-                FROM tracked_flights
-                WHERE id = ?
-                """,
-                (row_id)
-            )
-
-        print('Deleting the following rows...')
-        for row in cursor.fetchall():
-            print(tuple(row))
-
-        return 'Success'
-        """
         print("-----GOT REQ TO UNSUB-----")
         for i in request.form.items():
             print(i)
