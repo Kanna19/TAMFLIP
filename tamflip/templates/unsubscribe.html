@@ -19,7 +19,7 @@
   <span class="box_from">From</span>
   <span class="box_to">To</span>
   <span class="box_dep">Departure Date</span>
-  <span class="box_arr">Arrival Date</span>
+  <span class="box_arr">Return Date</span>
   <span class="box_class">Class</span>
   <span class="box_status">Tracking</span>
 </div>
@@ -39,6 +39,8 @@
 
             {% if trip['return_date'] != None %}
             <span class="fbox2">{{trip['return_date']}} </span>
+            {% else %}
+            <span class="fbox3">-</span>
             {% endif %}
 
             <span class="fbox2">{{trip['type_of_class']}} </span>

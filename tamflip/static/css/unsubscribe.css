@@ -11,6 +11,13 @@
   /* float: left; */
 }
 
+.fbox3{
+  padding: 45px 45px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* float: left; */
+}
+
 .flight-header2{
   width : 1000px;
   height: 40px;
