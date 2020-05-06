@@ -102,8 +102,6 @@
               </datalist>
 
 
-
-
             </div>
             <div class="bottom-right">
               <label for="Travel Date">Travel Date: </label>
@@ -187,10 +185,10 @@
         {% endfor %}
           <div class="price temp">&#8377;{{price}}</div>
           <!-- <input type="text" class="info-1" name="from_location" value="" required placeholder="From"> -->
-          <button class ="track" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
+          <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
-              <input type="text" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
-              <input type ="submit" name="submit" value="track">
+              <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
+              <input type="submit" class="button2" name="submit" value="Track">
             </div>
         </div>
       </div>

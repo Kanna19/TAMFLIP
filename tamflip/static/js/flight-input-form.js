@@ -61,25 +61,25 @@ $( "button[id*='track']" ).on("click", function(){
     $(input_id).toggleClass("hidden-input");
 });
 
-var $divs = $(".flight-box");
+// var $divs = $(".flight-box");
 
-$(".type42").on("click", function () {
-    var count = 0;
-    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
-        return $(a).(".fbox1 .fbox3").text() > $(b).(".fbox1 .fbox3").text();
-        count = count + 1;
-    });
-    $("#track-details").html(alphabeticallyOrderedDivs);
-    alert{count};
-});
-
-$(".type43").on("click", function () {
-    alert("clicked");
-    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
-        return $(a).find("#departTime").text() > $(b).find(".departTime").text();
-    });
-    $("#track-details").html(alphabeticallyOrderedDivs);
-});
+// $(".type42").on("click", function () {
+//     var count = 0;
+//     var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+//         return $(a).(".fbox1 .fbox3").text() > $(b).(".fbox1 .fbox3").text();
+//         count = count + 1;
+//     });
+//     $("#track-details").html(alphabeticallyOrderedDivs);
+//     alert{count};
+// });
+//
+// $(".type43").on("click", function () {
+//     alert("clicked");
+//     var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+//         return $(a).find("#departTime").text() > $(b).find(".departTime").text();
+//     });
+//     $("#track-details").html(alphabeticallyOrderedDivs);
+// });
 
 
 

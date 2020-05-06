@@ -420,3 +420,35 @@ input:checked + .slider:before {
     background-color: #4CAF50;
     color:white;
 }
+
+.button2{
+  width : 50px;
+  padding : 5px 5px;
+  margin: 5px auto;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(30,144,255);
+  color: white;
+  text-align: center;
+}
+
+.button3{
+  height: 40px;
+  width : 50px;
+  padding-top: 6px;
+  padding-bottom: 0;
+  margin: 5px 30px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(30,144,255);
+}
+
+.info-3{
+  width: 240px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 5px 10px;
+  border: 1px solid gray;
+  font-size: 18px;
+  border-radius: 4px;
+}
