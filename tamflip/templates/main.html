@@ -83,8 +83,27 @@
 
           <div class="bottom">
             <div class="bottom-left">
-              <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
-              <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination">
+              <!-- <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
+              <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination"> -->
+
+              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From">
+              <datalist id="Airports">
+                {% for (name, code) in airport_codes.items() %}
+                  <option value="{{name}}, {{code}}">
+                {% endfor %}
+              </datalist>
+
+
+              <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination">
+              <datalist id="Airports1">
+                {% for (name, code) in airport_codes.items() %}
+                  <option value="{{name}}, {{code}}">
+                {% endfor %}
+              </datalist>
+
+
+
+
             </div>
             <div class="bottom-right">
               <label for="Travel Date">Travel Date: </label>
@@ -113,10 +132,10 @@
               <span id="type5">Sort</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item type21" type="button">Price</button>
-              <button class="dropdown-item type22" type="button">Duration</button>
-              <button class="dropdown-item type22" type="button">Departure Time</button>
-              <button class="dropdown-item type22" type="button">Arrival Time</button>
+              <button class="dropdown-item type41" type="button">Price</button>
+              <button class="dropdown-item type42" type="button">Duration</button>
+              <button class="dropdown-item type43" type="button">Departure Time</button>
+              <button class="dropdown-item type44" type="button">Arrival Time</button>
             </div>
           </div>
           <div class="dropdown cls">
@@ -132,10 +151,10 @@
 
               <!-- <input type="range" min="1000" max="500000" value="50" class="slider" id="myRange"> -->
 
-              <button class="dropdown-item type21" type="button">Price Range</button>
-              <button class="dropdown-item type22" type="button">Duration</button>
-              <button class="dropdown-item type22" type="button">Departure Time</button>
-              <button class="dropdown-item type22" type="button">Arrival Time</button>
+              <button class="dropdown-item type51" type="button">Price Range</button>
+              <button class="dropdown-item type52" type="button">Duration</button>
+              <button class="dropdown-item type53" type="button">Departure Time</button>
+              <button class="dropdown-item type54" type="button">Arrival Time</button>
             </div>
           </div>
       </div>
@@ -159,14 +178,14 @@
           <div class="col-3">{{trip['arrival_time']}} </div>
           <div class="col">{{trip['duration']}} </div> -->
           <div class="fbox1">
-            <span class="fbox">{{trip['carrier_name']}}</span>
-            <span class="fbox2">{{trip['departure_time'].strftime('%a, %b %d %I:%M %p')}} </span>
-            <span class="fbox2">{{trip['arrival_time'].strftime('%a, %b %d %I:%M %p')}} </span>
+            <span class="fbox temp">{{trip['carrier_name']}}</span>
+            <span id="departTime" class="fbox2">{{trip['departure_time'].strftime('%a, %b %d %I:%M %p')}} </span>
+            <span id="arrivalTime" class="fbox2">{{trip['arrival_time'].strftime('%a, %b %d %I:%M %p')}} </span>
             <span class="fbox3">{{'{:02}h {:02}m'.format(trip['duration'].seconds//3600, (trip['duration'].seconds % 3600) // 60)}} </span>
             <hr>
           </div>
         {% endfor %}
-          <div class="price">&#8377;{{price}}</div>
+          <div class="price temp">&#8377;{{price}}</div>
           <!-- <input type="text" class="info-1" name="from_location" value="" required placeholder="From"> -->
           <button class ="track" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
@@ -178,6 +197,11 @@
       {% set count.value = count.value + 1 %}
     {% endfor %}
     </form>
+
+
+    <!-- <form class="" action="index.html" method="post">
+      <input type="submit" name="" value="More">
+    </form> -->
 
     <script type="text/javascript" src="{{url_for('static', filename='js/assets/jQuery-3.4.1.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/flight-input-form.js')}}"></script>

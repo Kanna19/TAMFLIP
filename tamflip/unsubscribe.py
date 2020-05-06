@@ -43,7 +43,44 @@ def index(token):
 
     # Take user input, unsubscribe and display confirmation
     if request.method == 'POST':
-        print("-----GOT REQ TO UNSUB-----")
-        for i in request.form.items():
-            print(i)
-        return "Your alerts have been ammended!!!"
+        # for i in request.form.items():
+        #     print(i)
+
+        flightids_continue_tracking = [
+            k for (k, v) in request.form.items()
+            if v == 'on'
+        ]
+
+        # Print rows which will be deleted.
+        db = get_db()
+        cursor = db.execute(
+            """
+            SELECT *
+            FROM tracked_flights
+            WHERE
+                email = ?
+            AND
+                id NOT IN %s
+            """ % ('(' + ', '.join(flightids_continue_tracking) + ')'),
+            (email,)
+        )
+
+        print('Deleting the following rows...')
+        for row in cursor.fetchall():
+            print(tuple(row))
+
+        # Delete the rows
+        db.execute(
+            """
+            DELETE
+            FROM tracked_flights
+            WHERE
+                email = ?
+            AND
+                id NOT IN %s
+            """ % ('(' + ', '.join(flightids_continue_tracking) + ')'),
+            (email,)
+        )
+        db.commit()
+
+        return 'Success'

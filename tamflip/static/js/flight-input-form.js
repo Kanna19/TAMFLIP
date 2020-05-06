@@ -54,27 +54,33 @@ $(".passenger").on("click", function(){
   }
 });
 
-$( "button[id*='track']" ).on("click", function(){   
+$( "button[id*='track']" ).on("click", function(){
     var button_id = $(this).attr('id');
     var num = button_id.substr(5);
     var input_id = ".hidden-input"+num;
     $(input_id).toggleClass("hidden-input");
 });
 
-// const allRanges = document.querySelectorAll(".range-wrap");
-// allRanges.forEach(wrap => {
-//   const range = wrap.querySelector(".range");
-//   const bubble = wrap.querySelector(".bubble");
-//
-//   range.addEventListener("input", () => {
-//     setBubble(range, bubble);
-//   });
-//   setBubble(range, bubble);
-// });
-//
-// function setBubble(range, bubble) {
-//   const val = range.value;
-//   const min = range.min ? range.min : 0;
-//   const max = range.max ? range.max : 100;
-//   const newVal = Number(((val - min) * 100) / (max - min));
-//   bubble.innerHTML = val;
+var $divs = $(".flight-box");
+
+$(".type42").on("click", function () {
+    var count = 0;
+    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+        return $(a).(".fbox1 .fbox3").text() > $(b).(".fbox1 .fbox3").text();
+        count = count + 1;
+    });
+    $("#track-details").html(alphabeticallyOrderedDivs);
+    alert{count};
+});
+
+$(".type43").on("click", function () {
+    alert("clicked");
+    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+        return $(a).find("#departTime").text() > $(b).find(".departTime").text();
+    });
+    $("#track-details").html(alphabeticallyOrderedDivs);
+});
+
+
+
+var loadData = 10;
