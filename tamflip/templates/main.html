@@ -86,18 +86,18 @@
               <!-- <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
               <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination"> -->
 
-              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From">
+              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From" autocomplete="off">
               <datalist id="Airports">
                 {% for (name, code) in airport_codes.items() %}
-                  <option value="{{name}}, {{code}}">
+                  <option value="{{name}} ({{code}})">
                 {% endfor %}
               </datalist>
 
 
-              <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination">
+              <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination" autocomplete="off">
               <datalist id="Airports1">
                 {% for (name, code) in airport_codes.items() %}
-                  <option value="{{name}}, {{code}}">
+                  <option value="{{name}} ({{code}})">
                 {% endfor %}
               </datalist>
 
