@@ -83,22 +83,23 @@
 
           <div class="bottom">
             <div class="bottom-left">
-              <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
-              <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination">
+              <!-- <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
+              <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination"> -->
 
-              <!-- <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From">
+              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From">
               <datalist id="Airports">
-                  {% for airport in zip(airport_codes) %}
-                    <option value="{{airport}}">
-                  {% endfor %}
+                {% for (name, code) in airport_codes.items() %}
+                  <option value="{{name}}, {{code}}">
+                {% endfor %}
               </datalist>
+
 
               <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination">
               <datalist id="Airports1">
-                  {% for airport in zip(airport_codes) %}
-                    <option value="{{airport}}">
-                  {% endfor %}
-              </datalist> -->
+                {% for (name, code) in airport_codes.items() %}
+                  <option value="{{name}}, {{code}}">
+                {% endfor %}
+              </datalist>
 
 
 
