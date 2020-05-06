@@ -249,6 +249,31 @@ hr{
   background-color: RoyalBlue;
 }
 
+.hidden-div{
+  display: none;
+}
+
+.button-div{
+  width: 100px;
+  margin: 5px auto;
+}
+
+.button4{
+  width : 100px;
+  margin : 0px auto;
+  background-color:rgb(30,144,255);
+  text-align:center;
+  color: white;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 20px;
+}
+
+.button4:hover {
+  background-color: RoyalBlue;
+}
+
 .email-info{
   display: inline-block;
 }

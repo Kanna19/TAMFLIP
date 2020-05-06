@@ -13,10 +13,10 @@ def get_id(my_dict):
 
 def create_files(flight_details, price_details):
 	# delete the previously hashed files if any
-	if("flight_file" in session):
-		os.remove(session["flight_file"])
-		os.remove(session["price_file"])
-		print("Removed")
+	# if("flight_file" in session):
+	# 	os.remove(session["flight_file"])
+	# 	os.remove(session["price_file"])
+	# 	print("Removed")
 	# create the new hashes for the objects
 	flight_file = hashObject(str(flight_details))
 	price_file = hashObject(str(price_details))

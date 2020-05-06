@@ -80,7 +80,18 @@ $( "button[id*='track']" ).on("click", function(){
 //     });
 //     $("#track-details").html(alphabeticallyOrderedDivs);
 // });
-
-
-
 var loadData = 10;
+$(".moreButton").on("click",function(){
+     for(var i = 1; i<=10; i++)
+     {
+        var n = (loadData+i).toString();
+        if($(".hidden-box"+n).length == 0) {
+          $(".moreButton").css('display','none');
+          break;
+        }
+        $(".hidden-box"+n).removeClass("hidden-div");
+        // $(".hidden-box"+n).css("background","red");
+     }
+     loadData = loadData+10;
+});
+
