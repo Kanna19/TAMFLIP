@@ -6,6 +6,7 @@ from flask import request, g
 
 from . import api_module
 from . import flight_tracker
+from . import expired_entries_cleanup
 
 from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -48,13 +49,21 @@ def create_app(test_config=None):
             job_defaults=job_defaults,
             timezone=utc
         )
-        # Add a cron job which gets triggered every day at 0330 UTC.
+        # Add a cron job to send alerts which gets triggered every day at 0330 UTC.
         scheduler.add_job(
             flight_tracker.send_alerts_to_subscribed_users,
             trigger='cron',
             args=[app],
             hour='3',
             minute='30'
+        )
+        # Add a cron job to cleanup database which gets triggered every day at 0000 UTC.
+        scheduler.add_job(
+            expired_entries_cleanup.remove_outdated_entries,
+            trigger='cron',
+            args=[app],
+            hour='0',
+            minute='0'
         )
         scheduler.start()
 
