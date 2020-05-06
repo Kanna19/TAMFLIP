@@ -25,9 +25,10 @@
 </div>
 {% endif %}
 
+<form class="input_form" method="post" name="inp_form">
+{%for trip in flight_details%}
 <div class ="flight-box2">
-    <form class="input_form" method="post" name="inp_form">
-    {%for trip in flight_details%}
+
         <div class="fbox1">
             <span class="fbox2">{{trip['carrier_name']}}</span>
             <span class="fbox2">{{trip['dept_carrier_code']}} </span>
@@ -48,9 +49,9 @@
               <span class="slider round"></span>
             </label>
         </div>
-    {% endfor %}
-    </form>
 </div>
+{% endfor %}
+</form>
 
 <input type="button" class="unsub_button" value="Submit">
 
