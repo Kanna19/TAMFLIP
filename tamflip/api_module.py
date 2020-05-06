@@ -87,9 +87,9 @@ def preprocess_json(form_object, my_object):
 		# stores one round trip if there
 		for itineraries in obj['itineraries']:
 			temp_dict = {}
-			temp_dict['duration'] = isodate.parse_duration(itineraries['duration'])
 			temp_dict['departure_time'] = isodate.parse_datetime(itineraries['segments'][0]['departure']['at'])
 			temp_dict['arrival_time'] = isodate.parse_datetime(itineraries['segments'][0]['arrival']['at'])
+			temp_dict['duration'] = temp_dict['arrival_time'] - temp_dict['departure_time']
 			temp_dict['carrier_code'] = itineraries['segments'][0]['carrierCode']
 			temp_dict['carrier_name'] = carrier_map[temp_dict['carrier_code']]
 			temp_dict['aircraft_code'] = itineraries['segments'][0]['aircraft']['code']
