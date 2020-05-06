@@ -19,8 +19,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'tamflip.sqlite'),
-
+        DATABASE=os.path.join(app.instance_path, 'tamflip.sqlite')
     )
 
     if test_config is None:
@@ -88,7 +87,5 @@ def create_app(test_config=None):
 
     from . import unsubscribe
     app.register_blueprint(unsubscribe.bp)
-
-    app.SECRET_KEY = "JOKE"
 
     return app
