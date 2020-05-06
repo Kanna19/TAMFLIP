@@ -26,12 +26,8 @@
 {% endif %}
 
 <div class ="flight-box2">
+    <form class="input_form" method="post" name="inp_form">
     {%for trip in flight_details%}
-  <!-- <div class="row align-items-center"> -->
-    <!-- <div class="col">{{trip['carrier_name']}}</div>
-    <div class="col-3">{{trip['departure_time']}}</div>
-    <div class="col-3">{{trip['arrival_time']}} </div>
-    <div class="col">{{trip['duration']}} </div> -->
         <div class="fbox1">
             <span class="fbox2">{{trip['carrier_name']}}</span>
             <span class="fbox2">{{trip['dept_carrier_code']}} </span>
@@ -48,11 +44,12 @@
 
           <!-- Rounded switch-->
             <label class="switch">
-              <input type="checkbox" checked>
+              <input type="checkbox" name="{{ trip['id'] }}" checked>
               <span class="slider round"></span>
             </label>
         </div>
     {% endfor %}
+    </form>
 </div>
 
 <input type="button" class="unsub_button" value="Submit">

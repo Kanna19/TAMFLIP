@@ -48,6 +48,9 @@ def index(token):
         )
 
     # Take user input, unsubscribe and display confirmation
-    if request.methods == 'POST':
+    if request.method == 'POST':
         # TODO
-        pass
+        print("-----GOT REQ TO UNSUB-----")
+        for i in request.form.items():
+            print(i)
+        return "Your alerts have been ammended!!!"
