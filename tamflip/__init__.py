@@ -78,4 +78,7 @@ def create_app(test_config=None):
     from . import subscribe
     app.register_blueprint(subscribe.bp)
 
+    from . import unsubscribe
+    app.register_blueprint(unsubscribe.bp)
+
     return app

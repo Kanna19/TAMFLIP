@@ -2,6 +2,9 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from itsdangerous import URLSafeSerializer, BadData
+from flask import url_for
+
 from tamflip.db import get_db
 from . import api_module
 
@@ -14,7 +17,9 @@ def send_email(receiver_email, details=''):
     smtp_server = 'smtp.gmail.com'
     smtp_port = 465
     with open('credentials.txt') as f:
-        sender_email, app_password = f.readline().split()
+        credentials = {k: v for k, v in map(str.split, f.readlines())}
+        sender_email = credentials['EMAIL']
+        app_password = credentials['APP_PASSWORD']
 
     message = MIMEMultipart()
     message['Subject'] = 'Test email'
@@ -53,6 +58,14 @@ def send_email(receiver_email, details=''):
         server.sendmail(sender_email, receiver_email, message.as_string())
         print('Sent email to %s' % receiver_email)
 
+def generate_user_token(email):
+    with open('credentials.txt') as f:
+        credentials = {k: v for k, v in map(str.split, f.readlines())}
+        server_secret = credentials['SERVER_SECRET']
+
+    serializer = URLSafeSerializer(server_secret, salt='unsubscribe')
+    return serializer.dumps(email)
+
 def get_tracked_flights(app):
     """Generator function to get the tracked flight details"""
     with app.app_context():
@@ -83,7 +96,7 @@ def send_alerts_to_subscribed_users(app):
             tracked_flight_details['from_location']
             + ' to '
             + tracked_flight_details['to_location'] + '\n'
-            + '\n'.join([(k + ': ' + v) for k, v in flight_details[0].items()])
+            + '\n'.join([(k + ': ' + str(v)) for k, v in flight_details[0].items()])
         )
 
         if len(flight_details) == 2:
@@ -91,8 +104,9 @@ def send_alerts_to_subscribed_users(app):
                 '\n' + tracked_flight_details['to_location']
                 + ' to '
                 + tracked_flight_details['from_location'] + '\n'
-                + '\n'.join([(k + ': ' + v) for k, v in flight_details[1].items()])
+                + '\n'.join([(k + ': ' + str(v)) for k, v in flight_details[1].items()])
             )
 
         email_body += '\nCost: ' + price_details
+        email_body += '\nToken:' + generate_user_token(tracked_flight_details['email'])
         send_email(tracked_flight_details['email'], email_body)
