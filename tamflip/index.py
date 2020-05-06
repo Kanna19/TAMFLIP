@@ -2,7 +2,7 @@ from flask import g, render_template, request, url_for, Blueprint
 from . import api_module
 from flask import session
 from . import store_info
-from .helper_functions import get_airport_codes
+from .helper_functions import get_airport_codes, get_parsed_form_dict
 
 bp = Blueprint('index', __name__, url_prefix="/")
 
@@ -10,14 +10,15 @@ bp = Blueprint('index', __name__, url_prefix="/")
 def index():
 
 	airport_codes = get_airport_codes()
-	
+
 	if request.method == 'GET':
 		return render_template('main.html', airport_codes=airport_codes)
 
 	if request.method == 'POST':
 		if(request.form["submit"] =="search"):
+			parsed_form = get_parsed_form_dict(request.form)
 			# clear out any files created with session variables if any.
-			flight_details, price_details = api_module.get_flight_details(request.form)
+			flight_details, price_details = api_module.get_flight_details(parsed_form)
 			# creates the files to store data for each of the above data
 			store_info.create_files(flight_details, price_details)
 			return render_template(
