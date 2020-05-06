@@ -86,18 +86,30 @@
               <input type="text" class="info-1" name="from_location" value="" required placeholder="From">
               <input type="text" class="info-1" name="to_location" value="" required placeholder="Destination">
 
+<<<<<<< HEAD
 <!--               <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From">
+||||||| merged common ancestors
+              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From">
+=======
+              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From" autocomplete="off">
+>>>>>>> 65a699ab59e644771b390a2c5e227e4c46d86b9b
               <datalist id="Airports">
                 {% for (name, code) in airport_codes.items() %}
-                  <option value="{{name}}, {{code}}">
+                  <option value="{{name}} ({{code}})">
                 {% endfor %}
               </datalist> -->
 
 
+<<<<<<< HEAD
 <!--               <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination">
+||||||| merged common ancestors
+              <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination">
+=======
+              <input list="Airports1" id="toLoc" class="info-1" name="to_location" placeholder="Destination" autocomplete="off">
+>>>>>>> 65a699ab59e644771b390a2c5e227e4c46d86b9b
               <datalist id="Airports1">
                 {% for (name, code) in airport_codes.items() %}
-                  <option value="{{name}}, {{code}}">
+                  <option value="{{name}} ({{code}})">
                 {% endfor %}
               </datalist>
  -->
