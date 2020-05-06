@@ -70,7 +70,7 @@ def get_flight_details(form_object):
 
 	# We get a success response
 	flight_details, price_details = preprocess_json(form_object, y_get_flight)
-	print(flight_details)
+	# print(flight_details)
 	return (flight_details, price_details)
 
 # preprocess the JSON object into a clean list
@@ -94,6 +94,15 @@ def preprocess_json(form_object, my_object):
 			temp_dict['carrier_name'] = carrier_map[temp_dict['carrier_code']]
 			temp_dict['aircraft_code'] = itineraries['segments'][0]['aircraft']['code']
 			temp_dict['number_of_stops'] = str(itineraries['segments'][0]['numberOfStops'])
+			temp_dict['adults'] = str(form_object['adults'])
+			temp_dict['children'] = str(form_object['children'])
+			temp_dict['infants'] = str(form_object['infants'])
+			temp_dict['from_location'] = form_object['from_location']
+			temp_dict['to_location'] = form_object['to_location']
+			temp_dict['type_of_class'] = form_object['type_of_class']
+			temp_dict['departure_date'] = form_object['departure_date']
+			if((form_object['return_date'] is None or form_object['return_date'] == '') == False):
+				temp_dict['return_date'] = form_object['return_date']
 			temp_list.append(temp_dict)
 		price_details.append(obj['price']['total'])
 		flight_details.append(temp_list)
