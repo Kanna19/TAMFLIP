@@ -37,8 +37,7 @@ def init_db_command():
     """Clear DB and make new DB"""
     # TODO: Can we replace init_db_command with init_db???
     init_db()
-
-    click.echo('Initalized Database')
+    click.echo('Initialized Database')
 
 #Function to link app with these functions
 def init_app(app):
