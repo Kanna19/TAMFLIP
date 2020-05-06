@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/unsubscribe.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
     <title>TAMFLIP</title>
@@ -26,7 +26,7 @@
 {% endif %}
 
 <div class ="flight-box2">
-  {%for trip in flight_details%}
+    {%for trip in flight_details%}
   <!-- <div class="row align-items-center"> -->
     <!-- <div class="col">{{trip['carrier_name']}}</div>
     <div class="col-3">{{trip['departure_time']}}</div>
@@ -46,7 +46,7 @@
 
             <span class="fbox2">{{trip['type_of_class']}} </span>
 
-          <!-- Rounded switch -->
+          <!-- Rounded switch-->
             <label class="switch">
               <input type="checkbox" checked>
               <span class="slider round"></span>
