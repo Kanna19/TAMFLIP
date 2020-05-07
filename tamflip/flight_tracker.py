@@ -117,6 +117,20 @@ def get_tracked_flights(app, email):
         return [{k: v for k, v in zip(column_names, tuple(row))}
                 for row in cursor.fetchall()]
 
+def update_stored_prices(app, updates):
+    with app.app_context():
+        db = get_db()
+        for update in updates:
+            db.execute(
+                """
+                UPDATE tracked_flights
+                SET prev_price = ?
+                WHERE id = ?
+                """,
+                (update[1], update[0])
+            )
+        db.commit()
+
 def send_alerts_to_subscribed_users(app):
     print('Started Cron job which handles sending updates to users')
     for email in get_user_emails(app):
