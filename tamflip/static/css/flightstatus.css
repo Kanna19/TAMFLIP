@@ -18,17 +18,25 @@
 }
 
 .mybox1{
-    width : 120px;
+    width : 125px;
     height : 20px;
-    padding: 5px 5px 5px 5px;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    display: inline-block;
+}
+
+.mybox3{
+    width : 260px;
+    height : 20px;
+    padding: 0px 0px 0px 0px;
     text-align: center;
     display: inline-block;
 }
 
 .mybox2{
-    width : 220px;
+    width : 180px;
     height : 20px;
-    padding: 5px 5px 5px 5px;
+    padding: 0px 0px 0px 0px;
     text-align: center;
     display: inline-block;
 }
