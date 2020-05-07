@@ -52,71 +52,71 @@ def get_flight_details(form_object):
 		+ '&currencyCode=' + 'INR'
 	)
 
-	# Send HTTP request to Flight API to fetch flight details
-	x_get_flight = requests.get(
+	response = requests.get(
 		url_get_flight,
-		headers={'Authorization': 'Bearer '+ str(access_token)}
+		headers={'Authorization': 'Bearer ' + str(access_token)}
 	)
-	y_get_flight = x_get_flight.json()
 
-	# TODO: Handle the following cases by displaying error messages to UI.
-	# In case request is invalid/no response from server
-	if y_get_flight.get("errors") != None:
-		return ([] , [])
+	if response.status_code != 200:
+		return ([], [])
+
+	flight_offers = response.json()
 
 	# In case of no flights detected
-	if y_get_flight['meta']['count'] == 0:
+	if flight_offers['meta']['count'] == 0:
 		return ([], [])
 
 	# We get a success response
-	flight_details, price_details = preprocess_json(form_object, y_get_flight)
+	flight_details, price_details = preprocess_json(form_object, flight_offers)
 	# print(flight_details)
 	return (flight_details, price_details)
 
 # preprocess the JSON object into a clean list
-def preprocess_json(form_object, my_object):
+def preprocess_json(form_object, flight_offers):
+	# map carrier codes to carrier names
+	carrier_map = flight_offers['dictionaries']['carriers']
+
 	flight_details = []
 	price_details = []
-	# map carrier codes to carrier names
-	carrier_map = {}
-	for obj in my_object['dictionaries']['carriers']:
-		carrier_map[obj] = my_object['dictionaries']['carriers'][obj]
 	# store all the flight details into a dictionary
-	for obj in my_object['data']:
+	for flight_offer in flight_offers['data']:
 		temp_list = []
 		# stores one round trip if there
-		for itineraries in obj['itineraries']:
-			temp_dict = {}
-			temp_dict['departure_time'] = isodate.parse_datetime(itineraries['segments'][0]['departure']['at'])
-			temp_dict['arrival_time'] = isodate.parse_datetime(itineraries['segments'][0]['arrival']['at'])
-			temp_dict['duration'] = temp_dict['arrival_time'] - temp_dict['departure_time']
-			temp_dict['carrier_code'] = itineraries['segments'][0]['carrierCode']
-			temp_dict['carrier_name'] = carrier_map[temp_dict['carrier_code']]
-			temp_dict['aircraft_code'] = itineraries['segments'][0]['aircraft']['code']
-			temp_dict['number_of_stops'] = str(itineraries['segments'][0]['numberOfStops'])
-			temp_dict['adults'] = str(form_object['adults'])
-			temp_dict['children'] = str(form_object['children'])
-			temp_dict['infants'] = str(form_object['infants'])
-			temp_dict['from_location'] = form_object['from_location']
-			temp_dict['to_location'] = form_object['to_location']
-			temp_dict['type_of_class'] = form_object['type_of_class']
-			temp_dict['departure_date'] = form_object['departure_date']
-			if((form_object['return_date'] is None or form_object['return_date'] == '') == False):
-				temp_dict['return_date'] = form_object['return_date']
+		for itinerary in flight_offer['itineraries']:
+			temp_dict = {
+				'departure_time': isodate.parse_datetime(itinerary['segments'][0]['departure']['at']),
+				'arrival_time': isodate.parse_datetime(itinerary['segments'][-1]['arrival']['at']),
+				'duration': isodate.parse_duration(itinerary['duration']),
+				'carrier_code': itinerary['segments'][0]['carrierCode'],
+				'carrier_name': carrier_map[itinerary['segments'][0]['carrierCode']],
+				'aircraft_code': itinerary['segments'][0]['aircraft']['code'],
+				'number_of_stops': str(sum([int(segment['numberOfStops'])
+											for segment in itinerary['segments']])),
+				'adults': str(form_object['adults']),
+				'children': str(form_object['children']),
+				'infants': str(form_object['infants']),
+				'from_location': form_object['from_location'],
+				'to_location': form_object['to_location'],
+				'type_of_class': form_object['type_of_class'],
+				'departure_date': form_object['departure_date'],
+				'return_date': form_object['return_date']
+			}
 			temp_list.append(temp_dict)
-		price_details.append(obj['price']['total'])
+
+		price_details.append(flight_offer['price']['total'])
 		flight_details.append(temp_list)
+
 	return flight_details, price_details
 
 def query_tracked_flight(user_object):
 	flight_details, price_details = get_flight_details(user_object)
 	for i, flight in enumerate(flight_details):
 		if (flight[0]['carrier_code'] == user_object['dept_carrier_code']
-			and flight[0]['aircraft_code'] == user_object['dept_aircraft_code']):
-		# for round trip, checking the return flight details too
-			if(len(flight)==2):
+				and flight[0]['aircraft_code'] == user_object['dept_aircraft_code']):
+			# If round trip then, check return flight details too
+			if len(flight) == 2:
 				if(flight[1]['carrier_code'] == user_object['return_carrier_code']
-					and flight[1]['aircraft_code'] == user_object['return_aircraft_code']):
+						and flight[1]['aircraft_code'] == user_object['return_aircraft_code']):
 					return flight, price_details[i]
 			else :
 				return flight, price_details[i]
