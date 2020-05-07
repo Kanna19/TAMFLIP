@@ -2,18 +2,20 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
 from itsdangerous import URLSafeSerializer, BadData
-from flask import url_for
+from flask import url_for, render_template
 
 from tamflip.db import get_db
 from . import api_module
 
-def send_email(receiver_email, details=''):
+import jinja2
+
+def send_email(receiver_email, image_file='', url=''):
     """
     Function to send email to the given receiver email id.
     Provide sender credentials in the file credentials.txt
     """
-    # TODO: Email structure.
     smtp_server = 'smtp.gmail.com'
     smtp_port = 465
     with open('credentials.txt') as f:
@@ -26,28 +28,32 @@ def send_email(receiver_email, details=''):
     message['From'] = sender_email
     message['To'] = receiver_email
 
-    # Create the plain-text and HTML version of your message
-    text = details
-    html = """\
-    <html>
-      <body>
-        <p>Hoi,<br>
-           This is the html part.<br>
-           <a href="https://www.youtube.com/watch?v=RcMQuy1ObeY"> Check this out!! </a>
-        </p>
-        <h3> Sent from apscheduler triggered cron job. Jai kc </h3>
-      </body>
-    </html>
-    """
+    # Encapsulate the plain and HTML versions of the message body in an
+    # 'alternative' part, so message agents can decide which they want to display.
+    message_alt = MIMEMultipart('alternative')
+    message.attach(message_alt)
+    message_alt.attach(MIMEText('Image showing status of your tracked flight'))
 
-    # Turn these into plain/html MIMEText objects
-    part1 = MIMEText(text, "plain")
-    part2 = MIMEText(html, "html")
+    # We reference the image in the IMG SRC attribute by the ID we give it below
+    message_alt.attach(
+        MIMEText(
+            """
+            <h2>Price updates</h2> <br>
+            <img src="cid:image_updates">
+            <footer>
+                <a href=%s> Manage your flights </a>
+            </footer>
+            """ % url,
+            'html'
+        )
+    )
 
-    # Add HTML/plain-text parts to MIMEMultipart message
-    # The email client will try to render the last part first
-    message.attach(part1)
-    message.attach(part2)
+    with open(image_file, 'rb') as f:
+        message_img = MIMEImage(f.read())
+
+    # Define the image's ID as referenced above
+    message_img.add_header('Content-ID', '<image_updates>')
+    message.attach(message_img)
 
     # Create secure connection with server and send email
     context = ssl.create_default_context()
@@ -89,24 +95,22 @@ def send_alerts_to_subscribed_users(app):
         if flight_details is None:
             continue
 
+        for trip in flight_details:
+            trip['id'] = str(tracked_flight_details['id'])
+            trip['prev_price'] = tracked_flight_details['prev_price']
+
         print('Flight details retrieved.')
 
-        # Dummy email body
-        email_body = (
-            tracked_flight_details['from_location']
-            + ' to '
-            + tracked_flight_details['to_location'] + '\n'
-            + '\n'.join([(k + ': ' + str(v)) for k, v in flight_details[0].items()])
-        )
-
-        if len(flight_details) == 2:
-            email_body += (
-                '\n' + tracked_flight_details['to_location']
-                + ' to '
-                + tracked_flight_details['from_location'] + '\n'
-                + '\n'.join([(k + ': ' + str(v)) for k, v in flight_details[1].items()])
+        with app.app_context():
+            rendered_template = render_template(
+                'flight_email.html',
+                flight_details=flight_details,
+                cur_price=price_details
             )
 
-        email_body += '\nCost: ' + price_details
-        email_body += '\nToken:' + generate_user_token(tracked_flight_details['email'])
-        send_email(tracked_flight_details['email'], email_body)
+        send_email(
+            tracked_flight_details['email'],
+            image_file='tamflip/static/images/terminal.jpg',
+            url=('127.0.0.1/unsubscribe/'
+                 + generate_user_token(tracked_flight_details['email']))
+        )
