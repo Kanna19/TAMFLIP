@@ -89,12 +89,22 @@ $(".moreButton").on("click",function(){
 //     alert{count};
 // });
 
+var numLoading = 0;
 $(".type41").on("click", function(){
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
-          return $(a).find(".price").text() > $(b).find(".price").text() ? 1: -1;
+          var x =  $(a).find(".price").text();
+          var y =  $(b).find(".price").text();
+          num1 = parseInt(x, 10);
+          num2 = parseInt(y, 10);
+          return num1 > num2 ? 1: -1;
       })
-  $("#track-details").append(divArr)
+  $("#track-details").append(divArr);
+  $(divArr).addClass("hidden-div");
+
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
 });
 
 
@@ -103,21 +113,57 @@ $(".type42").on("click", function(){
   divArr.sort(function(a, b) {
           return $(a).find(".fbox3").text() > $(b).find(".fbox3").text() ? 1: -1;
       })
-  $("#track-details").append(divArr)
+  $("#track-details").append(divArr);
+  $(divArr).addClass("hidden-div");
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
 });
+
 
 $(".type43").on("click", function(){
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
+
+            // var text1 = $(a).find(".departTime").text();
+            // var text2 = $(b).find(".departTime").text();
+            //       console.log(text1)
+            //       console.log(text2)
+            // var num =  $(a).find(".departTime").text() > $(b).find(".departTime").text() ? 1: -1;
+            //       console.log(num);
+            //       return num;
+
           return $(a).find(".departTime").text() > $(b).find(".departTime").text() ? 1: -1;
       })
-  $("#track-details").append(divArr)
+  $(divArr).addClass("hidden-div");
+  $("#track-details").append(divArr);
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
 });
+
+var len = 0;
+divArr = $(".flight-box")
+len = divArr.length;
 
 $(".type44").on("click", function(){
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
           return $(a).find(".arrivalTime").text() > $(b).find(".arrivalTime").text() ? 1: -1;
       })
-  $("#track-details").append(divArr)
+
+  $(divArr).addClass("hidden-div");
+  $("#track-details").append(divArr);
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
+});
+
+
+$(".moreButton").on("click", function(){
+  divArr = $(".flight-box")
+  for (var i = numLoading; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
+  numLoading = numLoading + 10;
 });

@@ -143,6 +143,12 @@
   border: 1px solid rgb(230,230, 230);
 }
 
+.slider{
+  height: 300px;
+  width: 500px;
+}
+
+
 .info-1:focus{
   background: white;
 }
