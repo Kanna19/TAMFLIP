@@ -164,13 +164,13 @@
     <form id ="track-details" method ="post" autocomplete="off">
     {% set count = namespace(value=0) %}
     {%for (flight, price) in zip(flight_details, price_details)%}
-      {% if count.value>=10 %}
+      {% if count.value >= 10 %}
       <div class ="flight-box hidden-box{{count.value}} hidden-div">
         {%for trip in flight%}
           <div class="fbox1">
             <span class="fbox temp">{{trip['carrier_name']}}</span>
-            <span id="departTime" class="fbox2">{{trip['departure_time'].strftime('%a, %b %d %I:%M %p')}} </span>
-            <span id="arrivalTime" class="fbox2">{{trip['arrival_time'].strftime('%a, %b %d %I:%M %p')}} </span>
+            <span  class="fbox2 departTime">{{trip['departure_time'].strftime('%a, %b %d, %H:%M')}} </span>
+            <span class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%a, %b %d, %H:%M')}} </span>
             <span class="fbox3">{{'{:02}h {:02}m'.format(trip['duration'].seconds//3600, (trip['duration'].seconds % 3600) // 60)}} </span>
             <hr>
           </div>
@@ -189,8 +189,8 @@
         {%for trip in flight%}
           <div class="fbox1">
             <span class="fbox temp">{{trip['carrier_name']}}</span>
-            <span id="departTime" class="fbox2">{{trip['departure_time'].strftime('%a, %b %d %I:%M %p')}} </span>
-            <span id="arrivalTime" class="fbox2">{{trip['arrival_time'].strftime('%a, %b %d %I:%M %p')}} </span>
+            <span class="fbox2 departTime">{{trip['departure_time'].strftime('%a, %b %d, %H:%M')}} </span>
+            <span class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%a, %b %d, %H:%M')}} </span>
             <span class="fbox3">{{'{:02}h {:02}m'.format(trip['duration'].seconds//3600, (trip['duration'].seconds % 3600) // 60)}} </span>
             <hr>
           </div>
@@ -207,12 +207,12 @@
       {% endif %}
       {% set count.value = count.value + 1 %}
     {% endfor %}
+    </form>
     {% if count.value >0 %}:
       <div class = "button-div">
         <button class = "moreButton button4" type="button" >More</button>
       </div>
     {%endif%}
-    </form>
 
 
     <!-- <form class="" action="index.html" method="post">
