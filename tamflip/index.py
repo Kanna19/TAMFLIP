@@ -31,7 +31,10 @@ def index():
 			# gets back the data accordingly for the session
 			flight_details, price_details = store_info.get_data()
 			entry_id, email_id = store_info.get_id(request.form)
-			store_info.make_entry(email_id, flight_details[entry_id], price_details[entry_id])
+			entry_there = store_info.entry_exists(email_id, flight_details[entry_id])
+			# Stores in the database if the entry didn't exist before
+			if(entry_there == False):
+				store_info.make_entry(email_id, flight_details[entry_id], price_details[entry_id])
 			return render_template(
 				'main.html',
 				flight_details=flight_details,
