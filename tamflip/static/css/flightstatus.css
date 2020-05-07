@@ -17,8 +17,24 @@
   /* float: left; */
 }
 
+.mybox1{
+    width : 120px;
+    height : 20px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+    display: inline-block;
+}
+
+.mybox2{
+    width : 220px;
+    height : 20px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+    display: inline-block;
+}
+
 .flight-header2{
-  width : 1000px;
+  width : 1100px;
   height: 40px;
   border : 2px solid rgb(203, 203, 203);
   text-align: left;
@@ -80,7 +96,7 @@
 }
 
 .flight-box2{
-  width : 1000px;
+  width : 1100px;
   height: 80px;
   border : 2px solid rgb(203, 203, 203);
   border-radius: 5px;

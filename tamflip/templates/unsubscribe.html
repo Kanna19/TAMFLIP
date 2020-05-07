@@ -14,14 +14,14 @@
 
 {% if request.method == 'GET'%}
 <div class="flight-header2">
-  <span class="box_cc">Carrier Code</span>
-  <span class="box_ac">Aircraft Code</span>
-  <span class="box_from">From</span>
-  <span class="box_to">To</span>
-  <span class="box_dep">Departure Date</span>
-  <span class="box_arr">Return Date</span>
-  <span class="box_class">Class</span>
-  <span class="box_status">Tracking</span>
+  <div class="mybox1">Carrier Code</div>
+  <div class="mybox1">Aircraft Code</div>
+  <div class="mybox1">From</div>
+  <div class="mybox1">To</div>
+  <div class="mybox1">Departure</div>
+  <div class="mybox1">Return</div>
+  <div class="mybox1">Class</div>
+  <div class="mybox1">Tracking</div>
 </div>
 {% endif %}
 
@@ -30,26 +30,44 @@
 <div class ="flight-box2">
 
         <div class="fbox1">
-            <span class="fbox2">{{trip['carrier_name']}}</span>
-            <span class="fbox2">{{trip['dept_carrier_code']}} </span>
-            <span class="fbox2">{{trip['dept_aircraft_code']}} </span>
-            <span class="fbox2">{{trip['from_location']}} </span>
-            <span class="fbox2">{{trip['to_location']}} </span>
-            <span class="fbox2">{{trip['departure_date']}} </span>
+            <div class="mybox1">
+            {{trip['dept_carrier_code']}}
+            </div>
 
+            <div class="mybox1">
+            <span class="fbox2">{{trip['dept_aircraft_code']}} </span>
+            </div>
+
+            <div class="mybox1">
+            <span class="fbox2">{{trip['from_location']}} </span>
+            </div>
+
+            <div class="mybox1">
+            <span class="fbox2">{{trip['to_location']}} </span>
+            </div>
+
+            <div class="mybox1">
+            <span class="fbox2">{{trip['departure_date']}} </span>
+            </div>
+
+            <div class="mybox1">
             {% if trip['return_date'] != None %}
             <span class="fbox2">{{trip['return_date']}} </span>
             {% else %}
             <span class="fbox3">-</span>
             {% endif %}
+            </div>
 
+            <div class="mybox1">
             <span class="fbox2">{{trip['type_of_class']}} </span>
-
+            </div>
           <!-- Rounded switch-->
+            <div class="mybox1">
             <label class="switch">
               <input type="checkbox" name="{{ trip['id'] }}" checked>
               <span class="slider round"></span>
             </label>
+            </div>
         </div>
 </div>
 {% endfor %}

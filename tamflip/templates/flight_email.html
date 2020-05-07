@@ -12,13 +12,13 @@
 
 <h1 align='center'> Updates On The Flights You Are Tracking </h1>
 <div class="flight-header2">
-  <span class="box_cc">Flight</span>
-  <span class="box_from">From</span>
-  <span class="box_to">To</span>
-  <span class="box_dep">Departure Date</span>
-  <span class="box_arr">Return Date</span>
-  <span class="box_class">Class</span>
-  <span class="box_status">Price</span>
+  <div class="mybox2">Flight</div>
+  <div class="mybox1">From</div>
+  <div class="mybox1">To</div>
+  <div class="mybox1">Departure</div>
+  <div class="mybox1">Return</div>
+  <div class="mybox1">Class</div>
+  <div class="mybox2">Price</div>
 </div>
 
 
@@ -27,23 +27,38 @@
 <div class ="flight-box2">
 
         <div class="fbox1">
-            <span class="fbox2">{{trip['carrier_name']}} ({{trip['carrier_code']}}{{trip['aircraft_code']}})</span>
-            <span class="fbox2">{{trip['from_location']}} </span>
-            <span class="fbox2">{{trip['to_location']}} </span>
-            <span class="fbox2">{{trip['departure_date']}} </span>
+            <div class="mybox2">
+            {{trip['carrier_name']}} ({{trip['carrier_code']}}{{trip['aircraft_code']}})
+            </div>
 
+            <div class="mybox1">
+            {{trip['from_location']}}
+            </div>
+
+            <div class="mybox1">
+            {{trip['to_location']}}
+            </div>
+
+            <div class="mybox1">
+            {{trip['departure_date']}}
+            </div>
+
+            <div class="mybox1">
             {% if trip['return_date'] != None %}
-            <span class="fbox2">{{trip['return_date']}} </span>
+            {{trip['return_date']}}
             {% else %}
-            <span class="fbox3">-</span>
+            -
             {% endif %}
+            </div>
 
-            <span class="fbox2">{{trip['type_of_class']}} </span>
+            <div class="mybox1">
+            {{trip['type_of_class']}}
+            </div>
 
-            <span class="fbox2" id="price">
+            <div class="mybox2">
                 <strike><span>{{prev_price}}</span> </strike>
                 <span id="{{loop.index0}}">{{curr_price}} </span>
-            </span>
+            </div>
 
 
         </div>
