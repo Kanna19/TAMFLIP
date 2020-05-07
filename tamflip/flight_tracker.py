@@ -16,8 +16,6 @@ from selenium import webdriver
 def take_screenshot(url, image_file):
     print("\n\n-----TOOK PICTURE----\n\n")
 
-    url = "http://"+url
-
     op = webdriver.ChromeOptions()
     op.add_argument("--start-maximized")
     op.add_argument("--start-fullscreen")
@@ -44,7 +42,7 @@ def send_email(receiver_email, image_file, flightstatus_url, unsub_url):
     # take_screenshot(url=url, image_file=image_file)
 
     message = MIMEMultipart()
-    message['Subject'] = 'Test email'
+    message['Subject'] = 'Updates for your tracked flights'
     message['From'] = sender_email
     message['To'] = receiver_email
 
@@ -60,10 +58,8 @@ def send_email(receiver_email, image_file, flightstatus_url, unsub_url):
             """
             <h2>Price updates</h2> <br>
             <img src="cid:image_updates">
-            <footer>
-                <a href="%s"> Manage your flights </a> <br>
-                <a href="%s"> Check the current prices of your tracked flights </a>
-            </footer>
+            <a href="%s"> Manage your flights </a> <br>
+            <a href="%s"> Check the current prices of your tracked flights </a>
             """ % (unsub_url, flightstatus_url),
             'html'
         )
@@ -124,7 +120,7 @@ def get_tracked_flights(app, email):
 def send_alerts_to_subscribed_users(app):
     print('Started Cron job which handles sending updates to users')
     for email in get_user_emails(app):
-        base_url = '127.0.0.1:5000'
+        base_url = 'http://127.0.0.1:5000'
         image_file = 'tamflip/static/images/tempimage.png'
 
         take_screenshot(
