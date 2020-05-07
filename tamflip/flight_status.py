@@ -28,18 +28,16 @@ def index(token):
     for flight in get_tracked_flights(current_app, email):
         flight_details, curr_price = query_tracked_flight(flight)
 
-        #If no search result
+        # If no results are returned by the api
         if curr_price == -1:
             continue
 
-        flight_statuses.append(
-            (flight_details, float(flight['prev_price']), float(curr_price))
-        )
+        flight_statuses.append((flight_details,
+                                float(flight['prev_price']),
+                                float(curr_price)))
 
         if float(curr_price) != float(flight['prev_price']):
-            updates.append(
-                (flight['id'], curr_price)
-            )
+            updates.append((flight['id'], curr_price))
 
     print(flight_statuses)
     # Update prices in database
