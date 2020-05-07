@@ -18,8 +18,8 @@
   <div class="mybox1">Aircraft Code</div>
   <div class="mybox1">From</div>
   <div class="mybox1">To</div>
-  <div class="mybox1">Departure</div>
-  <div class="mybox1">Return</div>
+  <div class="mybox2">Departure</div>
+  <div class="mybox2">Return</div>
   <div class="mybox1">Class</div>
   <div class="mybox1">Tracking</div>
 </div>
@@ -46,11 +46,11 @@
             <span class="fbox2">{{trip['to_location']}} </span>
             </div>
 
-            <div class="mybox1">
+            <div class="mybox2">
             <span class="fbox2">{{trip['departure_date']}} </span>
             </div>
 
-            <div class="mybox1">
+            <div class="mybox2">
             {% if trip['return_date'] != None %}
             <span class="fbox2">{{trip['return_date']}} </span>
             {% else %}

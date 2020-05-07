@@ -19,7 +19,15 @@
 }
 
 .mybox1{
-    width : 130px;
+    width : 120px;
+    height : 20px;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    display: inline-block;
+}
+
+.mybox2{
+    width : 160px;
     height : 20px;
     padding: 0px 0px 0px 0px;
     text-align: center;
