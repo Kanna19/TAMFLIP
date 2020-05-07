@@ -25,6 +25,10 @@
 </div>
 {% endif %}
 
+
+{% if flight_details == [] %}
+<div class="error"> No Results Available</div>
+{% else %}
 <form class="input_form" method="post" name="inp_form">
 {%for trip in flight_details%}
 <div class ="flight-box2">
@@ -74,6 +78,7 @@
 </form>
 
 <input type="button" class="unsub_button" value="Submit">
+{% endif %}
 
 <script type="text/javascript" src="{{url_for('static', filename='js/assets/jQuery-3.4.1.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/unsubscribe.js')}}"></script>

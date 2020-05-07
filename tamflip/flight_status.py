@@ -24,11 +24,17 @@ def index(token):
     flight_statuses = []
     for flight in get_tracked_flights(current_app, email):
         flight_details, curr_price = query_tracked_flight(flight)
+
+        #If no search result
+        if curr_price == -1:
+            continue
+
         flight_statuses.append(
             (flight_details, float(flight['prev_price']), float(curr_price))
         )
 
     print(flight_statuses)
+
     return render_template(
         'flight_email.html',
         flight_statuses=flight_statuses

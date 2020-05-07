@@ -119,3 +119,5 @@ def query_tracked_flight(user_object):
 					return flight, price_details[i]
 			else :
 				return flight, price_details[i]
+
+	return [], -1

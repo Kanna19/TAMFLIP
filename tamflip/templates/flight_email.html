@@ -21,49 +21,52 @@
   <div class="mybox2">Price</div>
 </div>
 
+{% if flight_statuses == [] %}
+<div class="error"> No Results Available</div>
+{% else %}
+    {%for flight_details, prev_price, curr_price in flight_statuses%}
+    {% set trip = flight_details[0] %}
+    <div class ="flight-box2">
 
-{%for flight_details, prev_price, curr_price in flight_statuses%}
-{% set trip = flight_details[0] %}
-<div class ="flight-box2">
+            <div class="fbox1">
+                <div class="mybox3">
+                {{trip['carrier_name'][:15]}} ({{trip['carrier_code']}}{{trip['aircraft_code']}})
+                </div>
 
-        <div class="fbox1">
-            <div class="mybox3">
-            {{trip['carrier_name'][:15]}} ({{trip['carrier_code']}}{{trip['aircraft_code']}})
+                <div class="mybox1">
+                {{trip['from_location']}}
+                </div>
+
+                <div class="mybox1">
+                {{trip['to_location']}}
+                </div>
+
+                <div class="mybox1">
+                {{trip['departure_date']}}
+                </div>
+
+                <div class="mybox1">
+                {% if trip['return_date'] != None %}
+                {{trip['return_date']}}
+                {% else %}
+                -
+                {% endif %}
+                </div>
+
+                <div class="mybox1">
+                {{trip['type_of_class']}}
+                </div>
+
+                <div class="mybox2">
+                    <strike><span>{{prev_price}}</span> </strike>
+                    <span id="{{loop.index0}}">{{curr_price}} </span>
+                </div>
+
+
             </div>
-
-            <div class="mybox1">
-            {{trip['from_location']}}
-            </div>
-
-            <div class="mybox1">
-            {{trip['to_location']}}
-            </div>
-
-            <div class="mybox1">
-            {{trip['departure_date']}}
-            </div>
-
-            <div class="mybox1">
-            {% if trip['return_date'] != None %}
-            {{trip['return_date']}}
-            {% else %}
-            -
-            {% endif %}
-            </div>
-
-            <div class="mybox1">
-            {{trip['type_of_class']}}
-            </div>
-
-            <div class="mybox2">
-                <strike><span>{{prev_price}}</span> </strike>
-                <span id="{{loop.index0}}">{{curr_price}} </span>
-            </div>
-
-
-        </div>
-</div>
-{% endfor %}
+    </div>
+    {% endfor %}
+{% endif %}
 
 <script type="text/javascript" src="{{url_for('static', filename='js/assets/jQuery-3.4.1.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

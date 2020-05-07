@@ -17,6 +17,13 @@
   /* float: left; */
 }
 
+.error{
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color : gray;
+    font-size: 20px;
+}
+
 .mybox1{
     width : 125px;
     height : 20px;
