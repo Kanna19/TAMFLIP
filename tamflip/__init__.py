@@ -88,4 +88,7 @@ def create_app(test_config=None):
     from . import unsubscribe
     app.register_blueprint(unsubscribe.bp)
 
+    from . import flight_status
+    app.register_blueprint(flight_status.bp)
+
     return app

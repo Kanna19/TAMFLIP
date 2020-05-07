@@ -28,7 +28,7 @@ def take_screenshot(url, image_file):
     driver.quit()
 
 
-def send_email(receiver_email, image_file='', url=''):
+def send_email(receiver_email, image_file, flightstatus_url, unsub_url):
     """
     Function to send email to the given receiver email id.
     Provide sender credentials in the file credentials.txt
@@ -40,8 +40,8 @@ def send_email(receiver_email, image_file='', url=''):
         sender_email = credentials['EMAIL']
         app_password = credentials['APP_PASSWORD']
 
-    #Create email screenshot
-    take_screenshot(url=url, image_file=image_file)
+    # #Create email screenshot
+    # take_screenshot(url=url, image_file=image_file)
 
     message = MIMEMultipart()
     message['Subject'] = 'Test email'
@@ -61,9 +61,10 @@ def send_email(receiver_email, image_file='', url=''):
             <h2>Price updates</h2> <br>
             <img src="cid:image_updates">
             <footer>
-                <a href=%s> Manage your flights </a>
+                <a href="%s"> Manage your flights </a> <br>
+                <a href="%s"> Check the current prices of your tracked flights </a>
             </footer>
-            """ % url,
+            """ % (unsub_url, flightstatus_url),
             'html'
         )
     )
@@ -84,53 +85,64 @@ def send_email(receiver_email, image_file='', url=''):
         server.sendmail(sender_email, receiver_email, message.as_string())
         print('Sent email to %s' % receiver_email)
 
-def generate_user_token(email):
+def generate_user_token(email, salt):
     with open('credentials.txt') as f:
         credentials = {k: v for k, v in map(str.split, f.readlines())}
         server_secret = credentials['SERVER_SECRET']
 
-    serializer = URLSafeSerializer(server_secret, salt='unsubscribe')
+    serializer = URLSafeSerializer(server_secret, salt=salt)
     return serializer.dumps(email)
 
-def get_tracked_flights(app):
-    """Generator function to get the tracked flight details"""
+def get_user_emails(app):
+    """Returns all the user emails present in the database"""
     with app.app_context():
         db = get_db()
-        cursor = db.execute('SELECT * FROM tracked_flights')
+        cursor = db.execute(
+            """
+            SELECT DISTINCT email
+            FROM tracked_flights
+            """
+        )
+        return [row[0] for row in cursor.fetchall()]
+
+def get_tracked_flights(app, email):
+    """Returns all the flights tracked by given email"""
+    with app.app_context():
+        db = get_db()
+        cursor = db.execute(
+            """
+            SELECT *
+            FROM tracked_flights
+            WHERE email = ?
+            """,
+            (email,)
+        )
         column_names = list(map(lambda x: x[0], cursor.description))
-        for row in cursor.fetchall():
-            yield {
-                k: v
-                for k, v in zip(column_names, tuple(row))
-            }
+        return [{k: v for k, v in zip(column_names, tuple(row))}
+                for row in cursor.fetchall()]
 
 def send_alerts_to_subscribed_users(app):
     print('Started Cron job which handles sending updates to users')
-    for tracked_flight_details in get_tracked_flights(app):
-        flight_details, price_details = api_module.query_tracked_flight(
-            tracked_flight_details
+    for email in get_user_emails(app):
+        base_url = '127.0.0.1:5000'
+        image_file = 'tamflip/static/images/tempimage.png'
+
+        take_screenshot(
+            base_url + '/flightstatus/' + generate_user_token(email, 'flightstatus'),
+            image_file
         )
-        # Flight not found.
-        # TODO: Handle this case properly
-        if flight_details is None:
-            continue
-
-        for trip in flight_details:
-            trip['id'] = str(tracked_flight_details['id'])
-            trip['prev_price'] = tracked_flight_details['prev_price']
-
-        print('Flight details retrieved.')
-
-        with app.app_context():
-            rendered_template = render_template(
-                'flight_email.html',
-                flight_details=flight_details,
-                cur_price=price_details
-            )
 
         send_email(
-            tracked_flight_details['email'],
-            image_file='tamflip/static/images/terminal.jpg',
-            url=('127.0.0.1/unsubscribe/'
-                 + generate_user_token(tracked_flight_details['email']))
+            email,
+            image_file=image_file,
+            flightstatus_url=(
+                base_url
+                + '/flightstatus/'
+                + generate_user_token(email, 'flightstatus')
+            ),
+            unsub_url=(
+                base_url
+                + '/unsubscribe/'
+                + generate_user_token(email, 'unsubscribe')
+            )
         )

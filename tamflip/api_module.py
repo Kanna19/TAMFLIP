@@ -90,8 +90,7 @@ def preprocess_json(form_object, flight_offers):
 				'carrier_code': itinerary['segments'][0]['carrierCode'],
 				'carrier_name': carrier_map[itinerary['segments'][0]['carrierCode']],
 				'aircraft_code': itinerary['segments'][0]['aircraft']['code'],
-				'number_of_stops': str(sum([int(segment['numberOfStops'])
-											for segment in itinerary['segments']])),
+				'number_of_stops': str(sum([int(segment['numberOfStops']) for segment in itinerary['segments']])),
 				'adults': str(form_object['adults']),
 				'children': str(form_object['children']),
 				'infants': str(form_object['infants']),

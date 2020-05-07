@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/unsubscribe.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flightstatus.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
     <title>TAMFLIP</title>
@@ -11,10 +11,8 @@
 <body>
 
 <h1 align='center'> Updates On The Flights You Are Tracking </h1>
-
 <div class="flight-header2">
-  <span class="box_cc">Carrier Code</span>
-  <span class="box_ac">Aircraft Code</span>
+  <span class="box_cc">Flight</span>
   <span class="box_from">From</span>
   <span class="box_to">To</span>
   <span class="box_dep">Departure Date</span>
@@ -24,26 +22,27 @@
 </div>
 
 
-{%for trip in flight_details%}
+{%for flight_details, prev_price, curr_price in flight_statuses%}
+{% set trip = flight_details[0] %}
 <div class ="flight-box2">
 
         <div class="fbox1">
-            <span class="fbox2">{{trip['carrier_name']}}</span>
-            <span class="fbox2">{{trip['dept_carrier_code']}} </span>
-            <span class="fbox2">{{trip['dept_aircraft_code']}} </span>
+            <span class="fbox2">{{trip['carrier_name']}} ({{trip['carrier_code']}}{{trip['aircraft_code']}})</span>
             <span class="fbox2">{{trip['from_location']}} </span>
             <span class="fbox2">{{trip['to_location']}} </span>
             <span class="fbox2">{{trip['departure_date']}} </span>
 
             {% if trip['return_date'] != None %}
             <span class="fbox2">{{trip['return_date']}} </span>
+            {% else %}
+            <span class="fbox3">-</span>
             {% endif %}
 
             <span class="fbox2">{{trip['type_of_class']}} </span>
 
             <span class="fbox2" id="price">
-                <strike><span>{{trip['prev_price']}}</span> </strike>
-                <span id="{{cur_price + trip['id']}}">{{cur_price}} </span>
+                <strike><span>{{prev_price}}</span> </strike>
+                <span id="{{loop.index0}}">{{curr_price}} </span>
             </span>
 
 
@@ -59,13 +58,14 @@
 
 <script type="text/javascript">
 
-{% for trip in flight_details%}
+{%for flight_details, prev_price, curr_price in flight_statuses%}
+{% set trip = flight_details[0] %}
 
-if (Number("{{cur_price}}") > Number("{{flight_details[0]['prev_price']}}")) {
-    document.getElementById("{{cur_price + trip['id']}}").style.color = "red";
+if (Number("{{curr_price}}") > Number("{{prev_price}}")) {
+    document.getElementById("{{loop.index0}}").style.color = "red";
 }
 else {
-    document.getElementById("{{cur_price + trip['id']}}").style.color = "green";
+    document.getElementById("{{loop.index0}}").style.color = "green";
 }
 
 {% endfor %}
