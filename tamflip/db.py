@@ -39,7 +39,17 @@ def init_db_command():
     init_db()
     click.echo('Initialized Database')
 
+@click.command('show-db')
+@with_appcontext
+def show_db_command():
+    """Display db"""
+    db = get_db()
+    cursor = db.execute('SELECT * FROM tracked_flights')
+    for row in cursor.fetchall():
+        print(tuple(row))
+
 #Function to link app with these functions
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(show_db_command)
