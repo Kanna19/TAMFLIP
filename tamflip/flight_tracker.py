@@ -11,6 +11,23 @@ from . import api_module
 
 import jinja2
 
+from selenium import webdriver
+
+def take_screenshot(url, image_file):
+    print("\n\n-----TOOK PICTURE----\n\n")
+
+    url = "http://"+url
+
+    op = webdriver.ChromeOptions()
+    op.add_argument("--start-maximized")
+    op.add_argument("--start-fullscreen")
+
+    driver = webdriver.Chrome("./chromedriver", options=op)
+    driver.get(url)
+    driver.save_screenshot(image_file)
+    driver.quit()
+
+
 def send_email(receiver_email, image_file='', url=''):
     """
     Function to send email to the given receiver email id.
@@ -22,6 +39,9 @@ def send_email(receiver_email, image_file='', url=''):
         credentials = {k: v for k, v in map(str.split, f.readlines())}
         sender_email = credentials['EMAIL']
         app_password = credentials['APP_PASSWORD']
+
+    #Create email screenshot
+    take_screenshot(url=url, image_file=image_file)
 
     message = MIMEMultipart()
     message['Subject'] = 'Test email'

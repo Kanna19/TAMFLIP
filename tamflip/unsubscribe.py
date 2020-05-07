@@ -36,6 +36,7 @@ def index(token):
             {k: v for k, v in zip(column_names, tuple(row))}
             for row in cursor.fetchall()
         ]
+
         return render_template(
             'unsubscribe.html',
             flight_details=flight_details
