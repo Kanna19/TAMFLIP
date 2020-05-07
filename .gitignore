@@ -1,3 +1,6 @@
+*.dummyfile
+tempimage*
+
 # Login credentials
 credentials.txt
 
