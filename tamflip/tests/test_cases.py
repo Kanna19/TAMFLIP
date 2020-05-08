@@ -111,6 +111,7 @@ class TestCases(unittest.TestCase):
             }
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b"Tracked", response.data)
 
         pass
 
@@ -143,6 +144,7 @@ class TestCases(unittest.TestCase):
             }
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b"Tracked", response.data)
 
         #Track Again
         response = self.app.post(
@@ -153,6 +155,7 @@ class TestCases(unittest.TestCase):
             }
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b"Already tracking", response.data)
 
         pass
 
