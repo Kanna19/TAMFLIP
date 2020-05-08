@@ -193,6 +193,10 @@ $(".moreButton").on("click", function(){
     $(divArr[i]).removeClass("hidden-div");
   }
   numLoading = numLoading + 10;
+    if(numLoading >= len){
+    $(".noResults1").removeClass("hideResult");
+    $(".moreButton").addClass("hideResult");
+  }
 });
 
 
@@ -268,26 +272,6 @@ function modular_ajax(url, type, formData) {
         }
     });
 };
-
-  if(numLoading >= len){
-    $(".noResults1").removeClass("hideResult");
-    $(".moreButton").addClass("hideResult");
-  }
-});
-
-// var loadData = 10;
-// $(".moreButton").on("click",function(){
-//      for(var i = 1; i<=10; i++)
-//      {
-//         var n = (loadData+i).toString();
-//         if($(".hidden-box"+n).length == 0) {
-//           $(".moreButton").css('display','none');
-//           break;
-//         }
-//         $(".hidden-box"+n).removeClass("hidden-div");
-//      }
-//      loadData = loadData+10;
-// });
 
 
 
