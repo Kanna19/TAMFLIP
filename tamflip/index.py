@@ -39,5 +39,7 @@ def index():
 				'main.html',
 				flight_details=flight_details,
 				price_details=price_details,
-				airport_codes=airport_codes
+				airport_codes=airport_codes,
+				tracked_flight = entry_id,
+				entry_there = entry_there
 			)

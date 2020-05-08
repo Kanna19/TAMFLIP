@@ -15,12 +15,9 @@ def create_files(flight_details, price_details):
 	# delete the previously hashed files if any
 	if("flight_file" in session):
 		if(os.path.exists(session["flight_file"])):
-			print('Hello')
 			os.remove(session["flight_file"])
 		if(os.path.exists(session["price_file"])):
-			print('hello2')
 			os.remove(session["price_file"])
-		print("File Removed")
 	# create the new hashes for the objects
 	flight_file = hashObject(str(flight_details))
 	price_file = hashObject(str(price_details))
