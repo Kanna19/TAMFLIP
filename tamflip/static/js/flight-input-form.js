@@ -61,7 +61,6 @@ $( "button[id*='track']" ).on("click", function(){
     $(input_id).toggleClass("hidden-input");
 });
 
-
 var loadData = 10;
 $(".moreButton").on("click",function(){
      for(var i = 1; i<=10; i++)
