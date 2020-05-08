@@ -54,6 +54,45 @@
   list-style: none;
 }
 
+
+.hideDiv1{
+  display : none;
+}
+
+.errorDiv1{
+  width: 100%;
+  height: 30px;
+  margin: 15px auto;
+  background-color: rgb(223, 0, 0);
+  color: white;
+  font-size: 15px;
+  text-align: center;
+}
+
+.error1{
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.hideDiv2{
+  display : none;
+}
+
+.errorDiv2{
+  width: 100%;
+  height: 30px;
+  margin: 15px auto;
+  background-color: rgb(223, 0, 0);
+  color: white;
+  font-size: 15px;
+  text-align: center;
+}
+
+.error2{
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
 .btn{
   width : 100%;
   text-align: center;
@@ -148,7 +187,6 @@
   width: 500px;
 }
 
-
 .info-1:focus{
   background: white;
 }
@@ -207,12 +245,42 @@
   margin-bottom: 5px;
 }
 
-.fbox1 span{
+.fbox{
+  float: left;
+  width: 250px;
+  margin-left: 20px;
+  margin-right: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+.departTime{
+  float: left;
+  width: 170px;
+  margin : auto 30px;
+  text-align: center;
+}
+
+.arrivalTime{
+  float: left;
+  width: 170px;
+  margin : auto 30px;
+  text-align: center;
+}
+
+.fbox3{
+  float: right;
+  width: 100px;
+  margin : auto 20px;
+  text-align: center;
+}
+
+/* .fbox1 span{
   padding: 10px 10px;
   margin-left: 20px;
   margin-right: 20px;
-  /* float: left; */
-}
+} */
 
 /* .flight-box .row {
   margin-top: 10px;
@@ -482,4 +550,8 @@ input:checked + .slider:before {
   border: 1px solid gray;
   font-size: 18px;
   border-radius: 4px;
+}
+
+.hideResult{
+  display: none;
 }

@@ -84,14 +84,14 @@
           <div class="bottom">
             <div class="bottom-left">
 
-              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From" autocomplete="off">
+              <input list="Airports" id="fromLoc" class="info-1" name="from_location" placeholder="From" autocomplete="off" required>
                 <datalist id="Airports">
                   {% for (name, code) in airport_codes.items() %}
                       <option value="{{name}} ({{code}})">
                   {% endfor %}
                 </datalist>
 
-              <input list="Airports" id="toLoc" class="info-1" name="to_location" placeholder="Destination" autocomplete="off">
+              <input list="Airports" id="toLoc" class="info-1" name="to_location" placeholder="Destination" autocomplete="off" required>
                 <datalist id="Airports">
                   {% for (name, code) in airport_codes.items() %}
                       <option value="{{name}} ({{code}})">
@@ -101,14 +101,22 @@
             </div>
             <div class="bottom-right">
               <label for="Travel Date">Travel Date: </label>
-              <input type="date" class="info-2" name="departure_date" value="Travel Date"  required  placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
+              <input type="date" id="traDate" class="info-2" name="departure_date" min='1899-01-01' value="Travel Date"  required  placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
             <div id="returnDate" class="info-21">
               <label id="labelForReturnDate" for="Return Date">Return Date: </label>
-              <input type="date"  class="info-2" name="return_date" value="Return Date" placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
+              <input type="date"  id="reDate" class="info-2" name="return_date" value="Return Date" min='1899-01-01' placeholder="MM/DD/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
+            <div class="errorDiv2 hideDiv2">
+              <div class="error2">Error! From and Destination locations shouldn't be same</div>
+            </div>
+            <div class="errorDiv1 hideDiv1">
+              <div class="error1">Error! Return Date shouldn't be less than Travel Date</div>
+            </div>
+
+
             <div class="btn" id="submit">
-              <input class="button1" type="submit" name="submit" value="search">
+              <input class="button1" type="submit" name="submit" value="Search">
             </div>
           </div>
 
@@ -182,47 +190,29 @@
       </div>
       <!-- <h1>Hoi</h1> -->
       <div class="flight-header">
-        <span class="box1">Carrier</span>
-        <span class="box2">Departure Time</span>
-        <span class="box2">Arrival Time </span>
-        <span class="box3">Duration </span>
+        <div class="box1 fbox">Carrier</div>
+        <div class="box2 departTime">Departure Time</div>
+        <div class="box2 arrivalTime">Arrival Time </div>
+        <div class="box3 fbox3">Duration </div>
       </div>
     {% endif %}
 
     <form id ="track-details" method ="post" autocomplete="off">
     {% set count = namespace(value=0) %}
     {%for (flight, price) in zip(flight_details, price_details)%}
-      <!-- <div class ="flight-box hidden-box{{count.value}}">
-        {%for trip in flight%}
-          <div class="fbox1">
-            <span class="fbox temp">{{trip['carrier_name']}}</span>
-            <span class="fbox2 departTime">{{trip['departure_time'].strftime('%b %d, %a, %H:%M')}} </span>
-            <span class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%b %d, %a,%H:%M')}} </span>
-            <span class="fbox3">{{'{:02}h {:02}m'.format(trip['duration'].seconds//3600, (trip['duration'].seconds % 3600) // 60)}} </span>
-            <hr>
-          </div>
-        {% endfor %}
-          <div class="price temp">{{price}} &#8377;</div>
-          <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
-            <div class = "hidden-input{{count.value}} hidden-input">
-              <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
-              <input type="submit" class="button2" name="submit" value="Track">
-            </div>
-        </div>
-      </div> -->
 
       {% if count.value >= 10 %}
       <div class ="flight-box hidden-box{{count.value}} hidden-div">
         {%for trip in flight%}
           <div class="fbox1">
-            <span class="fbox temp">{{trip['carrier_name']}}</span>
-            <span  class="fbox2 departTime">{{trip['departure_time'].strftime('%a, %b %d, %H:%M')}} </span>
-            <span class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%a, %b %d, %H:%M')}} </span>
-            <span class="fbox3">{{'{:02}h {:02}m'.format((trip['duration'].total_seconds()//3600)|int, (trip['duration'].seconds % 3600) // 60)}} </span>
-            <hr>
+            <div class="fbox">{{trip['carrier_name']}}</div>
+            <div class="fbox2 departTime">{{trip['departure_time'].strftime('%b %d, %a, %H:%M')}} </div>
+            <div class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%b %d, %a, %H:%M')}} </div>
+            <div class="fbox3">{{'{:02}h {:02}m'.format((trip['duration'].total_seconds()//3600)|int, (trip['duration'].seconds % 3600) // 60)}} </div>
           </div>
+          <!-- <hr> -->
         {% endfor %}
-          <div class="price temp">{{price}} &#8377;</div>
+          <div class="price">{{price}} &#8377;</div>
           <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
               <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
@@ -234,14 +224,14 @@
       <div class ="flight-box hidden-box{{count.value}}">
         {%for trip in flight%}
           <div class="fbox1">
-            <span class="fbox temp">{{trip['carrier_name']}}</span>
-            <span class="fbox2 departTime">{{trip['departure_time'].strftime('%a, %b %d, %H:%M')}} </span>
-            <span class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%a, %b %d, %H:%M')}} </span>
-            <span class="fbox3">{{'{:02}h {:02}m'.format((trip['duration'].total_seconds()//3600)|int, (trip['duration'].seconds % 3600) // 60)}} </span>
-            <hr>
+            <div class="fbox">{{trip['carrier_name']}}</div>
+            <div class="fbox2 departTime">{{trip['departure_time'].strftime('%b %d, %a, %H:%M')}} </div>
+            <div class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%b %d, %a, %H:%M')}} </div>
+            <div class="fbox3">{{'{:02}h {:02}m'.format((trip['duration'].total_seconds()//3600)|int, (trip['duration'].seconds % 3600) // 60)}} </div>
           </div>
+          <!-- <hr> -->
         {% endfor %}
-          <div class="price temp">{{price}} &#8377;</div>
+          <div class="price">{{price}} &#8377;</div>
           <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
               <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
@@ -253,12 +243,18 @@
       {% set count.value = count.value + 1 %}
     {% endfor %}
     </form>
-    <!-- {% if count.value >0 %}: -->
+    {% if count.value >0 %}:
       <div class = "button-div">
         <button class = "moreButton button4" type="button" >More</button>
       </div>
-    <!-- {%endif%} -->
-
+    {% else %}
+        <div class="noResults" style="font-size: 15px; background: rgb(230,230,230); width: 200px; height: 50px; margin: 5px auto">
+            <p>No results to show</p>
+        </div>
+    {%endif%}
+    <div class="noResults1 hideResult" style="font-size: 15px; background: rgb(230,230,230); width: 250px; height: 25px; margin: 0 auto; text-align: center">
+        <p>No more results to show</p>
+    </div>
 
     <!-- <form class="" action="index.html" method="post">
       <input type="submit" name="" value="More">

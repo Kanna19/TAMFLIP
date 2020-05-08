@@ -35,6 +35,9 @@ $(".type32").on("click", function(){
   $(".hiddenInput2").val("One way");
   $("#returnDate").addClass("info-21");
   $("#returnDate").removeClass("info-22");
+  if($(".errorDiv1").hasClass("hideDiv1") == false){
+      $(".errorDiv1").addClass("hideDiv1");
+  }
 });
 
 $(".passenger").on("click", function(){
@@ -61,33 +64,63 @@ $( "button[id*='track']" ).on("click", function(){
     $(input_id).toggleClass("hidden-input");
 });
 
-
-var loadData = 10;
-$(".moreButton").on("click",function(){
-     for(var i = 1; i<=10; i++)
-     {
-        var n = (loadData+i).toString();
-        if($(".hidden-box"+n).length == 0) {
-          $(".moreButton").css('display','none');
-          break;
-        }
-        $(".hidden-box"+n).removeClass("hidden-div");
-        // $(".hidden-box"+n).css("background","red");
-     }
-     loadData = loadData+10;
+$("#fromLoc").change(function(){
+  if($(".errorDiv2").hasClass("hideDiv2") == false){
+      $(".errorDiv2").addClass("hideDiv2");
+  }
 });
 
-// var $divs = $(".flight-box");
+$("#toLoc").change(function(){
+  if($(".errorDiv2").hasClass("hideDiv2") == false){
+      $(".errorDiv2").addClass("hideDiv2");
+  }
+});
 
-// $(".type42").on("click", function () {
-//     var count = 0;
-//     var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
-//         return $(a).(".fbox1 .fbox3").text() > $(b).(".fbox1 .fbox3").text();
-//         count = count + 1;
-//     });
-//     $("#track-details").html(alphabeticallyOrderedDivs);
-//     alert{count};
-// });
+$(".button1").on("click", function(event){
+  var date1 = $("#traDate").val();
+  var date2 = $("#reDate").val();
+
+  var fromLoc = $("#fromLoc").val();
+  var toLoc = $("#toLoc").val();
+
+  var trip = $("#type3").text();
+
+  if(trip == "Round Trip"){
+    if(date2 < date1 && fromLoc == toLoc){
+      $(".errorDiv1").removeClass("hideDiv1");
+      $(".errorDiv2").removeClass("hideDiv2");
+      event.preventDefault();
+    }
+
+    else if (date2 < date1 && fromLoc != toLoc) {
+      $(".errorDiv1").removeClass("hideDiv1");
+      $(".errorDiv2").addClass("hideDiv2");
+      event.preventDefault();
+    }
+
+    else if (fromLoc == toLoc && date2 >= date1) {
+      $(".errorDiv2").removeClass("hideDiv2");
+      $(".errorDiv1").addClass("hideDiv1");
+      event.preventDefault();
+    }
+
+    else{
+      $(".errorDiv1").addClass("hideDiv1");
+      $(".errorDiv2").addClass("hideDiv2");
+    }
+  }
+  else{
+    if(fromLoc == toLoc){
+      $(".errorDiv2").removeClass("hideDiv2");
+      $(".errorDiv1").addClass("hideDiv1");
+      event.preventDefault();
+    }
+    else{
+      $(".errorDiv2").addClass("hideDiv2");
+      $(".errorDiv1").addClass("hideDiv1");
+    }
+  }
+});
 
 var numLoading = 0;
 $(".type41").on("click", function(){
@@ -124,15 +157,6 @@ $(".type42").on("click", function(){
 $(".type43").on("click", function(){
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
-
-            // var text1 = $(a).find(".departTime").text();
-            // var text2 = $(b).find(".departTime").text();
-            //       console.log(text1)
-            //       console.log(text2)
-            // var num =  $(a).find(".departTime").text() > $(b).find(".departTime").text() ? 1: -1;
-            //       console.log(num);
-            //       return num;
-
           return $(a).find(".departTime").text() > $(b).find(".departTime").text() ? 1: -1;
       })
   $(divArr).addClass("hidden-div");
@@ -162,8 +186,46 @@ $(".type44").on("click", function(){
 
 $(".moreButton").on("click", function(){
   divArr = $(".flight-box")
+  if(numLoading == 0){
+    numLoading = 10;
+  }
   for (var i = numLoading; i < numLoading+10; i++) {
     $(divArr[i]).removeClass("hidden-div");
   }
   numLoading = numLoading + 10;
+  if(numLoading >= len){
+    $(".noResults1").removeClass("hideResult");
+    $(".moreButton").addClass("hideResult");
+  }
 });
+
+// var loadData = 10;
+// $(".moreButton").on("click",function(){
+//      for(var i = 1; i<=10; i++)
+//      {
+//         var n = (loadData+i).toString();
+//         if($(".hidden-box"+n).length == 0) {
+//           $(".moreButton").css('display','none');
+//           break;
+//         }
+//         $(".hidden-box"+n).removeClass("hidden-div");
+//      }
+//      loadData = loadData+10;
+// });
+
+
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("traDate").setAttribute("min", today);
+document.getElementById("reDate").setAttribute("min", today);
