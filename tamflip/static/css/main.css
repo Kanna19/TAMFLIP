@@ -201,8 +201,6 @@
 }
 
 
-
-
 .flight-box{
   width : 900px;
   min-height: 130px;
@@ -324,6 +322,10 @@ hr{
 }
 
 .hidden-div{
+  display: none;
+}
+
+.hidden-tick{
   display: none;
 }
 

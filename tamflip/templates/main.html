@@ -116,7 +116,7 @@
 
 
             <div class="btn" id="submit">
-              <input class="button1" type="submit" name="submit" value="Search">
+              <input class="button1" type="submit" name="submit" value="search">
             </div>
           </div>
 
@@ -216,8 +216,15 @@
           <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
               <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
-              <input type="submit" class="button2" name="submit" value="Track">
+              <input type="submit" class="button2" id="trackb{{count.value}}" name="submit" value="Track">
             </div>
+            {% if count.value == tracked_flight%}
+              {% if entry_there %}
+                <span>Already tracking &#9989;</span>
+              {% else %}
+                <span>Tracked &#9989;</span>
+              {% endif %}
+            {% endif %}
         </div>
       </div>
       {% else %}
@@ -235,8 +242,15 @@
           <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
               <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
-              <input type="submit" class="button2" name="submit" value="Track">
+              <input type="submit" class="button2" id="trackb{{count.value}}" name="submit" value="Track">
             </div>
+            {% if count.value == tracked_flight%}
+              {% if entry_there %}
+                <span>Already tracking &#9989;</span>
+              {% else %}
+                <span>Tracked &#9989;</span>
+              {% endif %}
+            {% endif %}
         </div>
       </div>
       {% endif %}
