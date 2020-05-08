@@ -88,7 +88,9 @@ $(".button1").on("click", function(event){
   if(trip == "Round Trip"){
     if(date2 < date1 && fromLoc == toLoc){
       $(".errorDiv1").removeClass("hideDiv1");
-      $(".errorDiv2").removeClass("hideDiv2");
+      if(fromLoc != ""){
+        $(".errorDiv2").removeClass("hideDiv2");
+      }
       event.preventDefault();
     }
 
@@ -99,7 +101,9 @@ $(".button1").on("click", function(event){
     }
 
     else if (fromLoc == toLoc && date2 >= date1) {
-      $(".errorDiv2").removeClass("hideDiv2");
+      if(fromLoc != ""){
+        $(".errorDiv2").removeClass("hideDiv2");
+      }
       $(".errorDiv1").addClass("hideDiv1");
       event.preventDefault();
     }
@@ -111,7 +115,9 @@ $(".button1").on("click", function(event){
   }
   else{
     if(fromLoc == toLoc){
-      $(".errorDiv2").removeClass("hideDiv2");
+      if(fromLoc != ""){
+        $(".errorDiv2").removeClass("hideDiv2");
+      }
       $(".errorDiv1").addClass("hideDiv1");
       event.preventDefault();
     }
@@ -183,6 +189,22 @@ $(".type44").on("click", function(){
   }
 });
 
+$(".type45").on("click", function(){
+  divArr = $(".flight-box")
+  divArr.sort(function(a, b) {
+          var x =  $(a).find(".numOfStops").text();
+          var y =  $(b).find(".numOfStops").text();
+          num1 = parseInt(x, 10);
+          num2 = parseInt(y, 10);
+          return num1 > num2 ? 1: -1;
+      })
+  $("#track-details").append(divArr);
+  $(divArr).addClass("hidden-div");
+
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
+});
 
 $(".moreButton").on("click", function(){
   divArr = $(".flight-box")

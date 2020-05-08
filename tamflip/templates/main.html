@@ -138,6 +138,7 @@
               <button class="dropdown-item type42" type="button">Duration</button>
               <button class="dropdown-item type43" type="button">Departure Time</button>
               <button class="dropdown-item type44" type="button">Arrival Time</button>
+              <button class="dropdown-item type45" type="button">Num of Stops</button>
             </div>
           </div>
           <div class="dropdown cls">
@@ -191,6 +192,7 @@
       <!-- <h1>Hoi</h1> -->
       <div class="flight-header">
         <div class="box1 fbox">Carrier</div>
+        <div class="box5 numOfStops">Stops</div>
         <div class="box2 departTime">Departure Time</div>
         <div class="box2 arrivalTime">Arrival Time </div>
         <div class="box3 fbox3">Duration </div>
@@ -206,6 +208,7 @@
         {%for trip in flight%}
           <div class="fbox1">
             <div class="fbox">{{trip['carrier_name']}}</div>
+            <div class="fbox4 numOfStops">{{trip['number_of_stops']}}</div>
             <div class="fbox2 departTime">{{trip['departure_time'].strftime('%b %d, %a, %H:%M')}} </div>
             <div class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%b %d, %a, %H:%M')}} </div>
             <div class="fbox3">{{'{:02}h {:02}m'.format((trip['duration'].total_seconds()//3600)|int, (trip['duration'].seconds % 3600) // 60)}} </div>
@@ -232,6 +235,7 @@
         {%for trip in flight%}
           <div class="fbox1">
             <div class="fbox">{{trip['carrier_name']}}</div>
+            <div class="fbox4 numOfStops">{{trip['number_of_stops']}}</div>
             <div class="fbox2 departTime">{{trip['departure_time'].strftime('%b %d, %a, %H:%M')}} </div>
             <div class="fbox2 arrivalTime">{{trip['arrival_time'].strftime('%b %d, %a, %H:%M')}} </div>
             <div class="fbox3">{{'{:02}h {:02}m'.format((trip['duration'].total_seconds()//3600)|int, (trip['duration'].seconds % 3600) // 60)}} </div>
@@ -262,7 +266,7 @@
         <button class = "moreButton button4" type="button" >More</button>
       </div>
     {% else %}
-        <div class="noResults" style="font-size: 15px; background: rgb(230,230,230); width: 200px; height: 50px; margin: 5px auto">
+        <div class="noResults hideResult" style="font-size: 15px; background: rgb(230,230,230); width: 200px; height: 25px; margin: 5px auto; text-align: center">
             <p>No results to show</p>
         </div>
     {%endif%}
