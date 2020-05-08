@@ -82,6 +82,38 @@ class TestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         pass
 
+    def test_track_flights(self):
+        """Test the case in which we track a flight not already tracking"""
+
+        #Search
+        response = self.app.post(
+            '/',
+            data={
+                'from_location': 'Hyderabad (HYD)',
+                'to_location': 'Bangalore (BLR)',
+                'departure_date': '2020-05-20',
+                'return_date': '2020-05-21',
+                'type_of_class': 'Economy',
+                'adults': 1,
+                'children': 0,
+                'infants': 0,
+                'submit': 'search',
+            }
+        )
+        self.assertEqual(response.status_code, 200)
+
+        #Track
+        response = self.app.post(
+            '/',
+            data={
+                'email1': 'dummy_mail@mail.com',
+                'submit': 'Track',
+            }
+        )
+        self.assertEqual(response.status_code, 200)
+
+        pass
+
     def test_unsub_page_valid_token(self):
         """Test if unsubscribe page loads when valid token is provided"""
         response = self.app.get(
