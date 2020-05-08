@@ -197,10 +197,9 @@
       </div>
     {% endif %}
 
-    <form id ="track-details" method ="post" autocomplete="off">
+    <form id ="track-details" action = '/' method ="POST" enctype="text/plain" autocomplete="off">
     {% set count = namespace(value=0) %}
     {%for (flight, price) in zip(flight_details, price_details)%}
-
       {% if count.value >= 10 %}
       <div class ="flight-box hidden-box{{count.value}} hidden-div">
         {%for trip in flight%}
@@ -215,16 +214,11 @@
           <div class="price">{{price}} &#8377;</div>
           <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
-              <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
-              <input type="submit" class="button2" id="trackb{{count.value}}" name="submit" value="Track">
+              <input type="email" autocomplete="off" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
+              <input type="submit" class="button2" id="track-submit{{count.value}}" name="submit" value="Track">
             </div>
-            {% if count.value == tracked_flight%}
-              {% if entry_there %}
-                <span>Already tracking &#9989;</span>
-              {% else %}
-                <span>Tracked &#9989;</span>
-              {% endif %}
-            {% endif %}
+            <span class="hidden-tick" id="tracksu{{count.value}}">Already tracking &#9989;</span>
+            <span class="hidden-tick" id="tracksb{{count.value}}">Tracked &#9989;</span>
         </div>
       </div>
       {% else %}
@@ -241,16 +235,11 @@
           <div class="price">{{price}} &#8377;</div>
           <button class ="track button3" type ="button" id = "track{{ count.value }}"> <i class="fa fa-bell"></i></button>
             <div class = "hidden-input{{count.value}} hidden-input">
-              <input type="email" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
-              <input type="submit" class="button2" id="trackb{{count.value}}" name="submit" value="Track">
+              <input type="email" autocomplete="off" class="info-3" name="email{{count.value}}" id = "hidden-track{{ count.value }}" value=""placeholder="Email Address">
+              <input type="submit" class="button2" id="track-submit{{count.value}}" name="submit" value="Track">
             </div>
-            {% if count.value == tracked_flight%}
-              {% if entry_there %}
-                <span>Already tracking &#9989;</span>
-              {% else %}
-                <span>Tracked &#9989;</span>
-              {% endif %}
-            {% endif %}
+            <span class="hidden-tick" id="tracksu{{count.value}}">Already tracking &#9989;</span>
+            <span class="hidden-tick" id="tracksb{{count.value}}">Tracked &#9989;</span>
         </div>
       </div>
       {% endif %}
@@ -279,6 +268,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 

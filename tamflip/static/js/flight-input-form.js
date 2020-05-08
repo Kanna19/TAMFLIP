@@ -193,6 +193,82 @@ $(".moreButton").on("click", function(){
     $(divArr[i]).removeClass("hidden-div");
   }
   numLoading = numLoading + 10;
+});
+
+
+// Render details without page reload, trial
+
+$("input[id*='track-submit']").click(function(event){
+    // Prevent redirection with AJAX for contact form
+    var form = $('#track-details');
+    var form_id = 'track-details';
+    var url = form.prop('action');
+    var type = form.prop('method');
+    var formData = getContactFormData(form_id);
+
+    $(this).closest('form').find("input[type=email], textarea").val("");
+
+    // submit form via AJAX
+    send_form(form, form_id, url, type, modular_ajax, formData);
+});
+
+function getContactFormData(form) {
+    // creates a FormData object and adds chips text
+    var formData = new FormData(document.getElementById(form));
+    for (var [key, value] of formData.entries()) { console.log('formData', key, value);}
+    return formData
+}
+
+// need to handle for errors
+function send_form(form, form_id, url, type, inner_ajax, formData) {
+    // if (isFormDataEmpty(formData) == false ) { // checks if form is empty
+    event.preventDefault();
+        // inner AJAX call
+    inner_ajax(url, type, formData);
+    // }
+    // need to handle else
+}
+
+// need to take care for 
+function isFormDataEmpty(formData) {
+    // checks for all values in formData object if they are empty
+    for (var [key, value] of formData.entries()) {
+        if (value != '' && value != []) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function modular_ajax(url, type, formData) {
+    // Most simple modular AJAX building block
+    $.ajax({
+        url: url,
+        type: type,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function ( data ){
+           // response from Flask contains elements
+              tracked_flight = data.tracked_flight;
+              entry_there = data.entry_there;
+        },
+    }).done(function() {
+        if(!($('#tracksu'+tracked_flight).hasClass("hidden-tick"))){
+          $('#tracksu'+tracked_flight).addClass("hidden-tick");
+        }
+        if(!($('#tracksb'+tracked_flight).hasClass("hidden-tick"))){
+          $('#tracksb'+tracked_flight).addClass("hidden-tick");
+        }
+        if(entry_there){
+            $('#tracksu'+tracked_flight).removeClass("hidden-tick");
+        }
+        else{   
+            $('#tracksb'+tracked_flight).removeClass("hidden-tick");
+        }
+    });
+};
+
   if(numLoading >= len){
     $(".noResults1").removeClass("hideResult");
     $(".moreButton").addClass("hideResult");

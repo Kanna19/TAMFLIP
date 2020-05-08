@@ -3,6 +3,8 @@ from . import api_module
 from flask import session
 from . import store_info
 from .helper_functions import get_airport_codes, get_parsed_form_dict
+from flask import jsonify
+from flask import make_response
 
 bp = Blueprint('index', __name__, url_prefix="/")
 
@@ -15,7 +17,8 @@ def index():
 		return render_template('main.html', airport_codes=airport_codes)
 
 	if request.method == 'POST':
-		if(request.form["submit"] =="search"):
+		if("submit" in request.form):	
+		# if(request.form["submit"] =="search"):
 			parsed_form = get_parsed_form_dict(request.form)
 			# clear out any files created with session variables if any.
 			flight_details, price_details = api_module.get_flight_details(parsed_form)
@@ -35,11 +38,5 @@ def index():
 			# Stores in the database if the entry didn't exist before
 			if(entry_there == False):
 				store_info.make_entry(email_id, flight_details[entry_id], price_details[entry_id])
-			return render_template(
-				'main.html',
-				flight_details=flight_details,
-				price_details=price_details,
-				airport_codes=airport_codes,
-				tracked_flight = entry_id,
-				entry_there = entry_there
-			)
+			resp = {'tracked_flight': str(entry_id), 'entry_there': entry_there}
+			return make_response(jsonify(resp), 200)
