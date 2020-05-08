@@ -115,7 +115,7 @@ class TestCases(unittest.TestCase):
         pass
 
     def test_already_track_flights(self):
-        """Test the case in which we track a flight not already tracking"""
+        """Test the case in which we track a flight already tracking"""
 
         #Search
         response = self.app.post(
@@ -124,7 +124,7 @@ class TestCases(unittest.TestCase):
                 'from_location': 'Hyderabad (HYD)',
                 'to_location': 'Bangalore (BLR)',
                 'departure_date': '2020-05-20',
-                'return_date': '2020-05-21',
+                'return_date': '',
                 'type_of_class': 'Economy',
                 'adults': 1,
                 'children': 0,
