@@ -23,9 +23,7 @@ def check_valid_token(access_token):
 	url_get_valid += access_token
 	x_get_valid = requests.get(url_get_valid)
 	y_get_valid = x_get_valid.json()
-	if y_get_valid['state'] == 'approved':
-		return True
-	return False
+	return (y_get_valid['state'] == 'approved')
 
 def class_of_travel(travel_class):
 	return {
