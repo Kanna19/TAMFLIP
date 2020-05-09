@@ -11,13 +11,11 @@ def get_id(my_dict):
 		if(my_dict[key]!=""):
 			return (int(key[5:]), my_dict[key])
 
+# -7900429341268321396.txt.dummyfile
 def create_files(flight_details, price_details):
-	# delete the previously hashed files if any
-	if("flight_file" in session):
-		if(os.path.exists(session["flight_file"])):
-			os.remove(session["flight_file"])
-		if(os.path.exists(session["price_file"])):
-			os.remove(session["price_file"])
+	filelist = [ f for f in os.listdir('./') if f.endswith(".dummyfile") ]
+	for f in filelist:
+	    os.remove(os.path.join('./', f))
 	# create the new hashes for the objects
 	flight_file = hashObject(str(flight_details))
 	price_file = hashObject(str(price_details))
