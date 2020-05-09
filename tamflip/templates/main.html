@@ -201,8 +201,8 @@
       </div>
     {% endif %}
 
-    <form id ="track-details" action = '/' method ="POST" enctype="text/plain" autocomplete="off">
     {% set count = namespace(value=0) %}
+    <form id ="track-details" action = '/' method ="POST" enctype="text/plain" autocomplete="off">
     {%for (flight, price) in zip(flight_details, price_details)%}
       {% if count.value >= 10 %}
       <div class ="flight-box hidden-box{{count.value}} hidden-div">
@@ -264,6 +264,14 @@
     <div class="noResults1 hideResult" style="font-size: 15px; background: rgb(230,230,230); width: 250px; height: 25px; margin: 0 auto; text-align: center">
         <p>No more results to show</p>
     </div>
+
+    {% if request.method == 'POST'%}
+      {%  if count.value == 0 %}
+        <div class="noResults " style="font-size: 15px; background: rgb(230,230,230); width: 200px; height: 25px; margin: 5px auto; text-align: center">
+          <p>No results to show</p>
+        </div>
+      {% endif %}
+    {% endif %}
 
     <!-- <form class="" action="index.html" method="post">
       <input type="submit" name="" value="More">
