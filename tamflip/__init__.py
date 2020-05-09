@@ -19,7 +19,9 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'tamflip.sqlite')
+        DATABASE=os.path.join(app.instance_path, 'tamflip.sqlite'),
+        EMAIL_NOTIFIER_START_TIME={'hour': '3', 'minute': '30', 'second': '0'},
+        DATABASE_CLEANER_START_TIME={'hour': '0', 'minute': '0', 'second': '0'}
     )
 
     if test_config is None:
@@ -61,17 +63,20 @@ def create_app(test_config=None):
             flight_tracker.send_alerts_to_subscribed_users,
             trigger='cron',
             args=[app],
-            hour='3',
-            minute='30'
+            hour=app.config['EMAIL_NOTIFIER_START_TIME']['hour'],
+            minute=app.config['EMAIL_NOTIFIER_START_TIME']['minute'],
+            second=app.config['EMAIL_NOTIFIER_START_TIME']['second']
         )
         # Add a cron job to cleanup database which gets triggered every day at 0000 UTC.
         scheduler.add_job(
             expired_entries_cleanup.remove_outdated_entries,
             trigger='cron',
             args=[app],
-            hour='0',
-            minute='0'
+            hour=app.config['DATABASE_CLEANER_START_TIME']['hour'],
+            minute=app.config['DATABASE_CLEANER_START_TIME']['minute'],
+            second=app.config['DATABASE_CLEANER_START_TIME']['second']
         )
+
         scheduler.start()
 
     # Link with Database
