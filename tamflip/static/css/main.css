@@ -109,6 +109,9 @@
   text-align: center;
 }
 
+.hover1:hover {
+  background-color: RoyalBlue;
+}
 
 .bottom-left{
   width: 100%;
@@ -538,6 +541,10 @@ input:checked + .slider:before {
   background-color: rgb(30,144,255);
   color: white;
   text-align: center;
+}
+
+.button2:hover{
+  background-color: RoyalBlue;
 }
 
 .button3{
