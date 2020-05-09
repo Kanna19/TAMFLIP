@@ -43,21 +43,20 @@ def make_entry(email_id, flight_details, price_details):
 		db.execute(
 			"""
 			INSERT INTO tracked_flights(id,
-                                        email,
-                                        dept_aircraft_code,
-                                        dept_carrier_code,
-                                        return_aircraft_code,
-                                        return_carrier_code,
-                                        adults,
-                                        children,
-                                        infants,
-                                        from_location,
-                                        to_location,
-                                        departure_date,
-                                        return_date,
-                                        type_of_class,
-                                        prev_price)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+										email,
+										dept_aircraft_code,
+										dept_carrier_code,
+										return_aircraft_code,
+										return_carrier_code,
+										adults, children,
+										infants,
+										from_location,
+										to_location,
+										departure_date,
+										return_date,
+										type_of_class,
+										prev_price)
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 			""",
 			(None,
 			 email_id,
@@ -79,21 +78,21 @@ def make_entry(email_id, flight_details, price_details):
 		db.execute(
 			"""
 			INSERT INTO tracked_flights(id,
-                                        email,
-                                        dept_aircraft_code,
-                                        dept_carrier_code,
-                                        return_aircraft_code,
-                                        return_carrier_code,
-                                        adults,
-                                        children,
-                                        infants,
-                                        from_location,
-                                        to_location,
-                                        departure_date,
-                                        return_date,
-                                        type_of_class,
-                                        prev_price)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+										email,
+										dept_aircraft_code,
+										dept_carrier_code,
+										return_aircraft_code,
+										return_carrier_code,
+										adults,
+										children,
+										infants,
+										from_location,
+										to_location,
+										departure_date,
+										return_date,
+										type_of_class,
+										prev_price)
+			VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 			""",
 			(None,
 			 email_id,
