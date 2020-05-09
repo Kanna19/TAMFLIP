@@ -459,11 +459,6 @@ $(".filterButton").on("click", function(){
         $(".noResults1").removeClass("hideResult");
         $(".moreButton").addClass("hideResult");
       }
-      else {
-        alert("case2");
-        $(".noResults1").addClass("hideResult");
-        $(".moreButton").removeClass("hideResult");
-      }
       break;
     }
 

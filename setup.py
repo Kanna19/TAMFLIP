@@ -8,7 +8,7 @@ with io.open("README.md", "rt", encoding="utf8") as f:
 
 setup(
     name="tamflip",
-    version="0.0.1",
+    version="1.0.0",
     description="A Flask app to show and track flight prices",
     long_description=readme,
     packages=find_packages(),
