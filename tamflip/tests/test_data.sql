@@ -21,4 +21,6 @@ INSERT INTO tracked_flights
     (10, "evilboi@evilboi.com", "42", "Evilboiflight", "AA", "BB", "5", "1", "3", "NYC", "CAN",
         "2020-05-21", "2020-05-30", "Business", "12341"),
     (11, "testboi@testboi.com", "73H", "VA", "73W", "VA", "1", "0", "0", "NTL", "MEL",
-      "2020-05-14", "2020-05-16", "Economy", "12848.00");
+      "2020-05-14", "2020-05-16", "Economy", "0"),
+    (12, "testboi@testboi.com", "73H", "VA", "73W", "VA", "2", "0", "0", "NTL", "MEL",
+      "2020-05-14", NULL, "Business", "0");
