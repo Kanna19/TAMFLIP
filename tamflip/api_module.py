@@ -1,6 +1,7 @@
 import requests
 import json
 import isodate
+from flask import session
 
 # Getting an access token given API_KEY and API_SECRET
 def get_token():
@@ -13,10 +14,11 @@ def get_token():
 	x_post = requests.post(url_post, data=param_object_post)
 	y_post = x_post.json()
 	access_token = y_post['access_token']
+	session['api_token'] = access_token
 	return access_token
 
 # Checking if an access token is valid or not
-def check_valid_token():
+def check_valid_token(access_token):
 	url_get_valid = 'https://test.api.amadeus.com/v1/security/oauth2/token/'
 	url_get_valid += access_token
 	x_get_valid = requests.get(url_get_valid)
@@ -35,7 +37,10 @@ def class_of_travel(travel_class):
 
 # makes a call and returns the flightDetails filled in the form
 def get_flight_details(form_object):
-	access_token = get_token()
+	if("api_token" in session and check_valid_token(session["api_token"])):
+		access_token = session["api_token"]
+	else:
+		access_token = get_token()
 	# prepare URL for sending
 	url_get_flight = (
 		'https://test.api.amadeus.com/v2/shopping/flight-offers?'
