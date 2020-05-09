@@ -35,7 +35,6 @@ def init_db():
 @with_appcontext
 def init_db_command():
     """Clear DB and make new DB"""
-    # TODO: Can we replace init_db_command with init_db???
     init_db()
     click.echo('Initialized Database')
 
@@ -48,7 +47,7 @@ def show_db_command():
     for row in cursor.fetchall():
         print(tuple(row))
 
-#Function to link app with these functions
+# Function to link app with these commands
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
