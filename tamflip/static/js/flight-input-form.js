@@ -128,8 +128,25 @@ $(".button1").on("click", function(event){
   }
 });
 
+icon1 = $(".type41").find("i");
+icon2 = $(".type42").find("i");
+icon3 = $(".type43").find("i");
+icon4 = $(".type44").find("i");
+icon5 = $(".type45").find("i");
+icon6 = $(".type46").find("i");
+icon7 = $(".type47").find("i");
+
+
 var numLoading = 0;
 $(".type41").on("click", function(){
+  icon1.addClass("fa fa-hand-o-left");
+  icon2.removeClass("fa fa-hand-o-left");
+  icon3.removeClass("fa fa-hand-o-left");
+  icon4.removeClass("fa fa-hand-o-left");
+  icon5.removeClass("fa fa-hand-o-left");
+  icon6.removeClass("fa fa-hand-o-left");
+  icon7.removeClass("fa fa-hand-o-left");
+
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
           var x =  $(a).find(".price").text();
@@ -148,6 +165,14 @@ $(".type41").on("click", function(){
 
 
 $(".type42").on("click", function(){
+  icon1.removeClass("fa fa-hand-o-left");
+  icon2.addClass("fa fa-hand-o-left");
+  icon3.removeClass("fa fa-hand-o-left");
+  icon4.removeClass("fa fa-hand-o-left");
+  icon5.removeClass("fa fa-hand-o-left");
+  icon6.removeClass("fa fa-hand-o-left");
+  icon7.removeClass("fa fa-hand-o-left");
+
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
           return $(a).find(".fbox3").text() > $(b).find(".fbox3").text() ? 1: -1;
@@ -161,6 +186,14 @@ $(".type42").on("click", function(){
 
 
 $(".type43").on("click", function(){
+  icon1.removeClass("fa fa-hand-o-left");
+  icon2.removeClass("fa fa-hand-o-left");
+  icon3.addClass("fa fa-hand-o-left");
+  icon4.removeClass("fa fa-hand-o-left");
+  icon5.removeClass("fa fa-hand-o-left");
+  icon6.removeClass("fa fa-hand-o-left");
+  icon7.removeClass("fa fa-hand-o-left");
+
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
           return $(a).find(".departTime").text() > $(b).find(".departTime").text() ? 1: -1;
@@ -177,6 +210,14 @@ divArr = $(".flight-box")
 len = divArr.length;
 
 $(".type44").on("click", function(){
+  icon1.removeClass("fa fa-hand-o-left");
+  icon2.removeClass("fa fa-hand-o-left");
+  icon3.removeClass("fa fa-hand-o-left");
+  icon4.addClass("fa fa-hand-o-left");
+  icon5.removeClass("fa fa-hand-o-left");
+  icon6.removeClass("fa fa-hand-o-left");
+  icon7.removeClass("fa fa-hand-o-left");
+
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
           return $(a).find(".arrivalTime").text() > $(b).find(".arrivalTime").text() ? 1: -1;
@@ -190,6 +231,15 @@ $(".type44").on("click", function(){
 });
 
 $(".type45").on("click", function(){
+  icon1.removeClass("fa fa-hand-o-left");
+  icon2.removeClass("fa fa-hand-o-left");
+  icon3.removeClass("fa fa-hand-o-left");
+  icon4.removeClass("fa fa-hand-o-left");
+  icon5.addClass("fa fa-hand-o-left");
+  icon6.removeClass("fa fa-hand-o-left");
+  icon7.removeClass("fa fa-hand-o-left");
+
+
   divArr = $(".flight-box")
   divArr.sort(function(a, b) {
           var x =  $(a).find(".numOfStops").text();
@@ -220,6 +270,50 @@ $(".moreButton").on("click", function(){
     $(".moreButton").addClass("hideResult");
   }
 });
+
+$(".type46").on("click", function(){
+  icon1.removeClass("fa fa-hand-o-left");
+  icon2.removeClass("fa fa-hand-o-left");
+  icon3.removeClass("fa fa-hand-o-left");
+  icon4.removeClass("fa fa-hand-o-left");
+  icon5.removeClass("fa fa-hand-o-left");
+  icon6.addClass("fa fa-hand-o-left");
+  icon7.removeClass("fa fa-hand-o-left");
+
+  divArr = $(".flight-box")
+  divArr.sort(function(a, b) {
+          return $(a).find(".departTime").text() > $(b).find(".departTime").text() ? -1: 1;
+      })
+
+  $(divArr).addClass("hidden-div");
+  $("#track-details").append(divArr);
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
+});
+
+$(".type47").on("click", function(){
+  icon1.removeClass("fa fa-hand-o-left");
+  icon2.removeClass("fa fa-hand-o-left");
+  icon3.removeClass("fa fa-hand-o-left");
+  icon4.removeClass("fa fa-hand-o-left");
+  icon5.removeClass("fa fa-hand-o-left");
+  icon6.removeClass("fa fa-hand-o-left");
+  icon7.addClass("fa fa-hand-o-left");
+
+  divArr = $(".flight-box")
+  divArr.sort(function(a, b) {
+          return $(a).find(".arrivalTime").text() > $(b).find(".arrivalTime").text() ? -1: 1;
+      })
+
+  $(divArr).addClass("hidden-div");
+  $("#track-details").append(divArr);
+  for (var i = 0; i < numLoading+10; i++) {
+    $(divArr[i]).removeClass("hidden-div");
+  }
+});
+
+
 
 
 // Render details without page reload, trial
@@ -255,7 +349,7 @@ function send_form(form, form_id, url, type, inner_ajax, formData) {
     // need to handle else
 }
 
-// need to take care for 
+// need to take care for
 function isFormDataEmpty(formData) {
     // checks for all values in formData object if they are empty
     for (var [key, value] of formData.entries()) {
@@ -289,7 +383,7 @@ function modular_ajax(url, type, formData) {
         if(entry_there){
             $('#tracksu'+tracked_flight).removeClass("hidden-tick");
         }
-        else{   
+        else{
             $('#tracksb'+tracked_flight).removeClass("hidden-tick");
         }
     });
