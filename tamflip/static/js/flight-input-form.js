@@ -491,9 +491,6 @@ $(".filterButton").on("click", function(){
 });
 
 
-
-
-
 // Render details without page reload, trial
 
 $("input[id*='track-submit']").click(function(event){
@@ -519,23 +516,9 @@ function getContactFormData(form) {
 
 // need to handle for errors
 function send_form(form, form_id, url, type, inner_ajax, formData) {
-    // if (isFormDataEmpty(formData) == false ) { // checks if form is empty
     event.preventDefault();
-        // inner AJAX call
+    // inner AJAX call
     inner_ajax(url, type, formData);
-    // }
-    // need to handle else
-}
-
-// need to take care for
-function isFormDataEmpty(formData) {
-    // checks for all values in formData object if they are empty
-    for (var [key, value] of formData.entries()) {
-        if (value != '' && value != []) {
-            return false;
-        }
-    }
-    return true;
 }
 
 function modular_ajax(url, type, formData) {
@@ -552,17 +535,20 @@ function modular_ajax(url, type, formData) {
               entry_there = data.entry_there;
         },
     }).done(function() {
-        if(!($('#tracksu'+tracked_flight).hasClass("hidden-tick"))){
-          $('#tracksu'+tracked_flight).addClass("hidden-tick");
-        }
-        if(!($('#tracksb'+tracked_flight).hasClass("hidden-tick"))){
-          $('#tracksb'+tracked_flight).addClass("hidden-tick");
-        }
-        if(entry_there){
-            $('#tracksu'+tracked_flight).removeClass("hidden-tick");
-        }
-        else{
-            $('#tracksb'+tracked_flight).removeClass("hidden-tick");
+      // Make changes only for non-empty response 
+        if(tracked_flight !='-1'){
+          if(!($('#tracksu'+tracked_flight).hasClass("hidden-tick"))){
+            $('#tracksu'+tracked_flight).addClass("hidden-tick");
+          }
+          if(!($('#tracksb'+tracked_flight).hasClass("hidden-tick"))){
+            $('#tracksb'+tracked_flight).addClass("hidden-tick");
+          }
+          if(entry_there){
+              $('#tracksu'+tracked_flight).removeClass("hidden-tick");
+          }
+          else{
+              $('#tracksb'+tracked_flight).removeClass("hidden-tick");
+          }
         }
     });
 };
@@ -574,8 +560,6 @@ function updateRangeInput1(elem) {
 function updateRangeInput2(elem) {
     $(".rangeInput2").val($(elem).val());
 }
-
-
 
 var today = new Date();
 var dd = today.getDate();

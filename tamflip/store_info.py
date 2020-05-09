@@ -10,6 +10,7 @@ def get_id(my_dict):
 	for key in my_dict:
 		if my_dict[key] != '':
 			return (int(key[5:]), my_dict[key])
+	return(-1, '')
 
 def create_files(flight_details, price_details):
 	filelist = [ f for f in os.listdir('./') if f.endswith(".dummyfile") ]
