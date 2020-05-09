@@ -155,7 +155,7 @@
               <label for="durationRange">Duration Range: </label>
               <input type="range" class="durationRange" value="durationRange" min="0" max="24"> -->
 
-              <div class="slider ">
+              <!-- <div class="slider ">
                 <span style="position:absolute; color:red; border:1px solid blue; min-width:100px;">
                 <span id="myValue"></span>
                 </span>
@@ -177,8 +177,40 @@
                     myValue.innerHTML = myRange.value + ' ' + myUnits;
                     myValue.parentElement.style.left = px + 'px';
                   };
-                </script>
+                </script> -->
+                <div class="slidr1" style="border-bottom: 1px solid rgb(230, 230, 230); height: 120px;">
+                  <p>Price Range: </p>
+                  <div class="sliders1" style="margin: 5px auto; width: 100px;">
+                    <input type="range" min="0" max="500000" oninput="updateRangeInput1(this)" value="500000" style="width: 100px;">
+                  </div>
+                  <div>
+                    <div class="sliderlabel1" style="float: left; width: 50px; text-align: center;">
+                      <label for="priceRange"> Price < </label>
+                    </div>
+                    <div class="sliderText1" style="float: left; width: 80px ">
+                      <input class="rangeInput1" type="text" name="priceRange" value="500000" style="width: 80px; margin-left: 10px; border-radius: 5px;">
+                    </div>
+                  </div>
+                </div>
 
+                <div class="slidr2" style="border-bottom: 1px solid rgb(230, 230, 230); height: 120px;">
+                  <p>Num of Stops:</p>
+                  <div class="sliders2" style="margin: 5px auto; width: 100px;">
+                    <input type="range" min="0" max="5" oninput="updateRangeInput2(this)" value="5" style="width: 100px;">
+                  </div>
+                  <div>
+                    <div class="sliderlabel2" style="float: left; width: 50px; text-align: center;">
+                      <label for="priceRange"> Stops < </label>
+                    </div>
+                    <div class="sliderText2" style="float: left; width: 80px">
+                      <input class="rangeInput2" type="text" name="stopRange" value="5" style="width: 80px; margin-left: 10px; border-radius: 5px;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="btn">
+                  <input class="button1 filterButton" type="button" name="" value="Apply">
+                </div>
 
               <!-- <output class="bubble"></output> -->
 

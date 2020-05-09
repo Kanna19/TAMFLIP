@@ -158,8 +158,21 @@ $(".type41").on("click", function(){
   $("#track-details").append(divArr);
   $(divArr).addClass("hidden-div");
 
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
 
@@ -179,8 +192,21 @@ $(".type42").on("click", function(){
       })
   $("#track-details").append(divArr);
   $(divArr).addClass("hidden-div");
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
 
@@ -200,8 +226,21 @@ $(".type43").on("click", function(){
       })
   $(divArr).addClass("hidden-div");
   $("#track-details").append(divArr);
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
 
@@ -225,8 +264,21 @@ $(".type44").on("click", function(){
 
   $(divArr).addClass("hidden-div");
   $("#track-details").append(divArr);
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
 
@@ -251,8 +303,21 @@ $(".type45").on("click", function(){
   $("#track-details").append(divArr);
   $(divArr).addClass("hidden-div");
 
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
 
@@ -261,9 +326,24 @@ $(".moreButton").on("click", function(){
   if(numLoading == 0){
     numLoading = 10;
   }
-  for (var i = numLoading; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
+
   numLoading = numLoading + 10;
     if(numLoading >= len){
     $(".noResults1").removeClass("hideResult");
@@ -287,8 +367,21 @@ $(".type46").on("click", function(){
 
   $(divArr).addClass("hidden-div");
   $("#track-details").append(divArr);
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
 
@@ -308,10 +401,95 @@ $(".type47").on("click", function(){
 
   $(divArr).addClass("hidden-div");
   $("#track-details").append(divArr);
-  for (var i = 0; i < numLoading+10; i++) {
-    $(divArr[i]).removeClass("hidden-div");
+  var j=0;
+  for (var i = 0; i < numLoading+10; ) {
+
+    if(j >= divArr.length){
+      break;
+    }
+
+    if(filterValue(j)){
+      i++;
+      $(divArr[j]).removeClass("hidden-div");
+    }
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
   }
 });
+
+function filterValue(i){
+    divArr = $(".flight-box");
+
+    var x = $(".rangeInput1").val();
+    var y = $(".rangeInput2").val();
+
+    num1 = parseInt(x, 10);
+    num2 = parseInt(y, 10);
+
+    var val1 = parseInt($(divArr[i]).find(".price").text(), 10);
+    var val2 = parseInt($(divArr[i]).find(".numOfStops").text(), 10);
+
+    console.log("num1 = "+num1);
+    console.log("num2 = "+num2);
+    console.log("val1 = "+val1);
+    console.log("val2 = "+val2);
+
+    if(val1 > num1 || val2 > num2){
+      return false;
+    }
+    return true;
+}
+
+
+$(".filterButton").on("click", function(){
+  divArr = $(".flight-box");
+  var l = divArr.length;
+
+  var j = 0;
+
+  if(numLoading == 0){
+    numLoading = numLoading + 10;
+  }
+
+  for(var i=0; i<numLoading;){
+    if(j >= divArr.length){
+      if(i == 0){
+        $(".noResults1").removeClass("hideResult");
+        $(".moreButton").addClass("hideResult");
+      }
+      else {
+        alert("case2");
+        $(".noResults1").addClass("hideResult");
+        $(".moreButton").removeClass("hideResult");
+      }
+      break;
+    }
+
+    if(filterValue(j)){
+      $(divArr[j]).removeClass("hidden-div");
+      i++;
+    }
+
+    else{
+      $(divArr[j]).addClass("hidden-div");
+    }
+    j++;
+
+    console.log("i = "+i);
+    console.log("j = "+j);
+
+  }
+  if(j < divArr.length){
+    $(".noResults1").addClass("hideResult");
+    $(".moreButton").removeClass("hideResult");
+  }
+  if(numLoading == 10){
+    numLoading = 0;
+  }
+});
+
 
 
 
@@ -388,6 +566,14 @@ function modular_ajax(url, type, formData) {
         }
     });
 };
+
+function updateRangeInput1(elem) {
+    $(".rangeInput1").val($(elem).val());
+}
+
+function updateRangeInput2(elem) {
+    $(".rangeInput2").val($(elem).val());
+}
 
 
 
