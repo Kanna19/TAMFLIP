@@ -8,8 +8,8 @@ def get_token():
 	url_post = 'https://test.api.amadeus.com/v1/security/oauth2/token'
 	param_object_post = {
 		'grant_type': 'client_credentials',
-		'client_id':'jwCdvN4AVxtDLPqT7gDQI7Cdf1dlfdbb',
-		'client_secret':'rHnOqnhEsGxQhV3f'
+		'client_id':'0PsAsVqdGcnL8Mm8CnbWWgL58Q1OrYuA',
+		'client_secret':'zzrL2xqaJLkebOE2'
 	}
 	x_post = requests.post(url_post, data=param_object_post)
 	y_post = x_post.json()

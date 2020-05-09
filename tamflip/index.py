@@ -34,9 +34,13 @@ def index():
 			# gets back the data accordingly for the session
 			flight_details, price_details = store_info.get_data()
 			entry_id, email_id = store_info.get_id(request.form)
-			entry_there = store_info.entry_exists(email_id, flight_details[entry_id])
+			# Check for empty-response from form submission
+			if entry_id != -1 :
+				entry_there = store_info.entry_exists(email_id, flight_details[entry_id])
+			else :
+				entry_there = False
 			# Stores in the database if the entry didn't exist before
-			if(entry_there == False):
+			if(entry_id !=-1 and entry_there == False):
 				store_info.make_entry(email_id, flight_details[entry_id], price_details[entry_id])
 			resp = {'tracked_flight': str(entry_id), 'entry_there': entry_there}
 			return make_response(jsonify(resp), 200)
