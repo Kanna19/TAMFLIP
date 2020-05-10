@@ -57,6 +57,21 @@ $(".passenger").on("click", function(){
   }
 });
 
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("traDate").setAttribute("min", today);
+document.getElementById("reDate").setAttribute("min", today);
+
 $( "button[id*='track']" ).on("click", function(){
     var button_id = $(this).attr('id');
     var num = button_id.substr(5);
@@ -76,6 +91,21 @@ $("#toLoc").change(function(){
   }
 });
 
+$("#traDate").change(function(){
+  if($(".errorDiv1").hasClass("hideDiv1") == false){
+      $(".errorDiv1").addClass("hideDiv1");
+  }
+});
+
+$("#reDate").change(function(){
+  if($(".errorDiv1").hasClass("hideDiv1") == false){
+      $(".errorDiv1").addClass("hideDiv1");
+  }
+});
+
+
+
+
 $(".button1").on("click", function(event){
   var date1 = $("#traDate").val();
   var date2 = $("#reDate").val();
@@ -84,6 +114,16 @@ $(".button1").on("click", function(event){
   var toLoc = $("#toLoc").val();
 
   var trip = $("#type3").text();
+
+  // if(fromLoc == "" || toLoc == ""){
+  //   $(".errorDiv3").removeClass("hideDiv3");
+  //   event.preventDefault();
+  // }
+  //
+  // if(date1 < today || date2 < today){
+  //   $(".errorDiv4").removeClass("hideDiv4");
+  //   event.preventDefault();
+  // }
 
   if(trip == "Round Trip"){
     if(date2 < date1 && fromLoc == toLoc){
@@ -530,7 +570,7 @@ function modular_ajax(url, type, formData) {
               entry_there = data.entry_there;
         },
     }).done(function() {
-      // Make changes only for non-empty response 
+      // Make changes only for non-empty response
         if(tracked_flight !='-1'){
           if(!($('#tracksu'+tracked_flight).hasClass("hidden-tick"))){
             $('#tracksu'+tracked_flight).addClass("hidden-tick");
@@ -555,18 +595,3 @@ function updateRangeInput1(elem) {
 function updateRangeInput2(elem) {
     $(".rangeInput2").val($(elem).val());
 }
-
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
- if(dd<10){
-        dd='0'+dd
-    }
-    if(mm<10){
-        mm='0'+mm
-    }
-
-today = yyyy+'-'+mm+'-'+dd;
-document.getElementById("traDate").setAttribute("min", today);
-document.getElementById("reDate").setAttribute("min", today);
