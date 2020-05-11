@@ -191,11 +191,7 @@ class TestCases(unittest.TestCase):
             '/unsubscribe/' + self.tokens['test_unsubscribe'],
             data={'8': 'off', '9': 'on'}
         )
-        self.assertIn(b'Success', response.data)
-        # Check the page again to see if info has been updated.
-        response = self.app_client.get(
-            '/unsubscribe/' + self.tokens['test_unsubscribe']
-        )
+        # Check if info has been updated
         self.assertNotIn(b'Flight1', response.data)
         self.assertIn(b'Flight2', response.data)
 

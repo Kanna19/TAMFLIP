@@ -19,29 +19,6 @@ def index(token):
     except BadData as e:
         return 'Invalid token provided'
 
-    # Display unsubscribe page
-    if request.method == 'GET':
-        # Get tracked flights
-        db = get_db()
-        cursor = db.execute(
-            """
-            SELECT *
-            FROM tracked_flights
-            WHERE email = ?
-            """,
-            (email,)
-        )
-        column_names = list(map(lambda x: x[0], cursor.description))
-        flight_details = [
-            {k: v for k, v in zip(column_names, tuple(row))}
-            for row in cursor.fetchall()
-        ]
-
-        return render_template(
-            'unsubscribe.html',
-            flight_details=flight_details
-        )
-
     # Take user input, unsubscribe and display confirmation
     if request.method == 'POST':
         # for i in request.form.items():
@@ -84,4 +61,24 @@ def index(token):
         )
         db.commit()
 
-        return 'Success'
+    # Display unsubscribe page
+    # Get tracked flights
+    db = get_db()
+    cursor = db.execute(
+        """
+        SELECT *
+        FROM tracked_flights
+        WHERE email = ?
+        """,
+        (email,)
+    )
+    column_names = list(map(lambda x: x[0], cursor.description))
+    flight_details = [
+        {k: v for k, v in zip(column_names, tuple(row))}
+        for row in cursor.fetchall()
+    ]
+
+    return render_template(
+        'unsubscribe.html',
+        flight_details=flight_details
+    )
